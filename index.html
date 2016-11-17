@@ -29,7 +29,7 @@
             </select>
         </div>
         <div class="col-lg-1 col-lg-offset-11">
-            <button class="btn-lg btn-info">Add Book</button>
+            <button class="btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
         </div>
     </div>
     <div class "panel">
@@ -50,8 +50,34 @@
             </table>
         </div>
     </div>
+</div>
+</div>
+
+<!-- Modal for adding books -->
+<div class="modal fade" id="addBooks" tabindex="-1" role="dialog" aria-labelledby="addBooksLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addBooksLabel">Add Book</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-2">
+                Title
+            </div>
+            
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add Book</button>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
