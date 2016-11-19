@@ -41,10 +41,10 @@
                 <thead>
                     <tr>                        
                         <th style="border: 1px solid lightgrey;">Title</th>
-                        <th style="border: 1px solid lightgrey;">Author<select id="author-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select id="core-value-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select id="status-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select id="current-reader-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>                        
+                        <th style="border: 1px solid lightgrey;">Author<select id="author-list" class="filter select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select class="filter core-value-list select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select class="filter status-list select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select class="filter current-reader-list select-list form-control" style="display: none;"><option value=""></option></select></th>                        
                     </tr>
                 </thead>                
             </table>
@@ -75,11 +75,11 @@
                     </div>
                     <div class="form-group">
                         <label for="core-value-input">Core Value</label>
-                        <input type="text" class="form-control" id="core-value-input" placeholder="Core Value">                        
+                        <select name="coreValueInput" id="core-value-input" class="core-value-list select-list form-control"><option value=""></option></select>
                     </div>
                     <div class="form-group">
                         <label for="status-input">Status</label>
-                        <input type="text" class="form-control" id="status-input" placeholder="Status">                        
+                        <select name="coreValueInput" id="status-input" class="status-list select-list form-control"><option value=""></option></select>
                     </div>
                 </div>
                 
