@@ -84,6 +84,9 @@ $(document).ready( function () {
     $('#datatable').DataTable( {
             "processing": true,
             "ajax": "./Library.json",
+            "columnDefs": [
+                {"className": "dt-center", "targets": [ 2, 3, 4 ]}
+            ],
             "columns": [                 
                 { "data": "Title" },
                 { "data": "Authors" },
