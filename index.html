@@ -7,8 +7,7 @@
   <meta name="description" content="Library for Jill's unit.'">
   <meta name="author" content="Eric Dockter">
   
-  <link rel="stylesheet" href="./css/animate.css">
-  
+  <link rel="stylesheet" href="./css/animate.css">  
   <link rel="stylesheet" href="./css/bootstrap-flatly.min.css">
   <link rel="stylesheet" href="./css/style.css"> 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
@@ -38,15 +37,14 @@
     <br/>
     <div class="row animated fadeInLeft">
         <div class="col-lg-10 col-lg-offset-1">
-            <table id="datatable">
+            <table id="datatable" class="cell-border">
                 <thead>
                     <tr>                        
                         <th style="border: 1px solid lightgrey;">Title</th>
                         <th style="border: 1px solid lightgrey;">Author<select id="author-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;">Core Value<select id="core-value-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;">Status<select id="status-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;">Current Reader<select id="current-reader-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        
+                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select id="core-value-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select id="status-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select id="current-reader-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>                        
                     </tr>
                 </thead>                
             </table>
