@@ -4,12 +4,16 @@
   <meta charset="utf-8">
 
   <title>Datatable</title>
-  <meta name="description" content="Data">
-  <meta name="author" content="SitePoint">
+  <meta name="description" content="Library for Jill's unit.'">
+  <meta name="author" content="Eric Dockter">
   
-  <link rel="stylesheet" href="/css/bootstrap-flatly.min.css">
+  <link rel="stylesheet" href="./css/animate.css">
+  
+  <link rel="stylesheet" href="./css/bootstrap-flatly.min.css">
+  <link rel="stylesheet" href="./css/style.css"> 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/af-2.1.2/fh-3.1.2/r-2.1.0/datatables.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Lobster" rel="stylesheet">
   <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/af-2.1.2/datatables.min.css"/>-->
 
   <!--[if lt IE 9]>
@@ -17,32 +21,32 @@
   <![endif]-->
 </head>
 <body>
-    <div class="row">
-        <div class="col-lg-3">
-        <h2>Checkout System</h2>
+    <div class="row animated fadeInLeft">
+        <div class="col-lg-3 col-lg-offset-1">
+        <h1>Checkout System</h1>
         </div>
     </div>    
-    <div class="row">
-        <div class="col-lg-2 col-lg-offset-5">
-            <!--<select class="form-control select-list">
-                <option value=""></option>
-            </select>-->
-        </div>
-        <div class="col-lg-1 col-lg-offset-11">
-            <button class="btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
+    <div class="row  animated fadeInLeft">        
+        <div class="col-lg-3 col-lg-offset-1">
+            <div class="btn-group">
+            <button id="filter-button" class="btn-lg btn-danger">Filters</button>
+            <button id="search-button" class="btn-lg btn-warning">Search</button>        
+            <button id="add-book-button" class="btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
+    <br/>
+    <div class="row animated fadeInLeft">
+        <div class="col-lg-10 col-lg-offset-1">
             <table id="datatable">
                 <thead>
                     <tr>                        
-                        <th>Title</th>
-                        <th><select class="select-list form-control"><option value=""></option></select></th>
-                        <th>Core Value</th>
-                        <th>Status</th>
-                        <th>Current Reader</th>
-                        <th></th>
+                        <th style="border: 1px solid lightgrey;">Title</th>
+                        <th style="border: 1px solid lightgrey;">Author<select id="author-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;">Core Value<select id="core-value-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;">Status<select id="status-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;">Current Reader<select id="current-reader-list" class="select-list form-control" style="display: none;"><option value=""></option></select></th>
+                        
                     </tr>
                 </thead>                
             </table>
