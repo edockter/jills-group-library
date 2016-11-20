@@ -51,23 +51,34 @@ $(document).ready( function () {
     $('#add-book-button').click(function() { JelloButton('#add-book-button') });
 
     $('#add-author-button').click(function() { 
-        JelloButton('#add-author-button');
+        AnimateSelector('#add-author-button', 'pulse');
         
         if ($('.author-input').length <= 1) {            
-            $('#remove-author-button').show();
+            $('#remove-author-button').fadeIn();
         }
 
-        $(this).before('<input name="author[]" type="text" class="author-input form-control" id="author-input" placeholder="Author">');
+        $(this).before('<input name="author[]" type="text" class="author-input form-control" id="author-input" placeholder="Author" style="margin;top: 2%; display: none;">');
+        $(this).prev().css('opacity', 0)
+        .slideDown('fast').animate(
+            { opacity: 1 },
+            { queue: false, duration: 'slow' }
+            );
      });
 
      $('#remove-author-button').click(function() {
-         var authorBoxes = $('.author-input');
-         
-        authorBoxes[authorBoxes.length-1].remove();
+         var authorBoxes = $('.author-input');        
 
-         if ($('.author-input').length <= 1) {
-            $('#remove-author-button').hide();
-        }        
+        $(authorBoxes[authorBoxes.length-1]).css('opacity', 1)
+        .slideUp('fast').animate(
+            { opacity: 0 },
+            { queue: false, duration: 'fast', easing: "swing", complete: function() {
+                $(this).remove();
+         
+                if ($('.author-input').length <= 1) {
+                    $('#remove-author-button').fadeOut();
+                }                
+            }
+        });                
      })
 } );
 
@@ -164,5 +175,13 @@ function JelloButton(selectorString) {
     
     $(selectorString).addClass('animated jello').one(animationend,function() {
           $(selectorString).removeClass('animated jello');
+        });
+}
+
+function AnimateSelector(selectorString, animationString) {
+    var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';    
+    
+    $(selectorString).addClass('animated ' + animationString).one(animationend,function() {
+          $(selectorString).removeClass('animated ' + animationString);
         });
 }
