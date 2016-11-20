@@ -167,6 +167,7 @@ function ProcessAllLists(jsonData) {
         return i==a.indexOf(itm);
     });
     
+    // sort each specific list, compile and return
     coreValueList.sort();
     statusList.sort();
     currentReaderList.sort();
