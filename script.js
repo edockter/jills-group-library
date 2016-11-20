@@ -41,6 +41,10 @@ $(document).ready( function () {
     $('#search-button').click(function() { AnimateSelector('#search-button', 'jello') });
     $('#add-book-button').click(function() { AnimateSelector('#add-book-button', 'jello') });
 
+    $('#addbook-modal-save-button').click(function() {
+        swal("Book saved!", "Book has been added to the library.", "success");
+     });
+
     $('#filter-button').click(function() {
         AnimateSelector('#filter-button', 'jello');
 
