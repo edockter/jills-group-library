@@ -23,36 +23,37 @@
   <![endif]-->
 </head>
 <body>
-    <div class="row animated fadeInLeft">
-        <div class="col-lg-3 col-lg-offset-1">
-        <h1>Checkout System</h1>
-        </div>
-    </div>    
-    <div class="row  animated fadeInLeft">        
-        <div class="col-lg-3 col-lg-offset-1">
-            <div class="btn-group">
-            <button id="filter-button" class="btn-lg btn-danger">Filters</button>
-            <button id="search-button" class="btn-lg btn-warning">Search</button>        
-            <button id="add-book-button" class="btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
+    <div class="container-fluid">
+        <div class="row animated fadeInLeft">
+            <div class="col-lg-3 col-lg-offset-1">
+                <h1>Checkout System</h1>
+            </div>
+        </div>    
+        <div class="row  animated fadeInLeft">        
+            <div class="col-lg-4 col-lg-offset-1">
+                <div class="btn-group">
+                    <button id="filter-button" class="btn-lg btn-danger">Filters</button>
+                    <button id="search-button" class="btn-lg btn-warning">Search</button>        
+                    <button id="add-book-button" class="btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="row animated fadeInLeft">
-        <div class="col-lg-10 col-lg-offset-1">
-            <table id="datatable" class="cell-border">
-                <thead>
-                    <tr>                        
-                        <th style="border: 1px solid lightgrey; ">Title</th>
-                        <th style="border: 1px solid lightgrey;">Author<br><select multiple id="author-list" class="filter form-control"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select multiple class="filter core-value-list form-control"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select class="filter status-list form-control"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select class="filter current-reader-list form-control"><option value=""></option></select></th>                        
-                    </tr>
-                </thead>                
-            </table>
+        <br/>
+        <div class="row animated fadeInLeft">
+            <div class="col-lg-10 col-lg-offset-1">
+                <table id="datatable" class="cell-border">
+                    <thead>
+                        <tr>                        
+                            <th style="border: 1px solid lightgrey; ">Title</th>
+                            <th style="border: 1px solid lightgrey;">Author<br><select multiple id="author-list" class="filter form-control"><option value=""></option></select></th>
+                            <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select multiple class="filter core-value-list form-control"><option value=""></option></select></th>
+                            <th style="border: 1px solid lightgrey;" class="text-center">Status<select class="filter status-list form-control"><option value=""></option></select></th>
+                            <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select class="filter current-reader-list form-control"><option value=""></option></select></th>                        
+                        </tr>
+                    </thead>                
+                </table>
+            </div>
         </div>
-    </div>
 
     <!-- Modal for adding books -->
     <div class="modal fade" id="addBooks" tabindex="-1" role="dialog" aria-labelledby="addBooksLabel" aria-hidden="true">
@@ -88,13 +89,15 @@
                     </div>                
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="addbook-modal-save-button" type="button" class="btn btn-primary" data-dismiss="modal">Add Book</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="addbook-modal-save-button" type="button" class="btn btn-primary" data-dismiss="modal">Add Book</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
