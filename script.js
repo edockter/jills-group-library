@@ -1,7 +1,7 @@
 // READY Document actions -- DOM manipulations
 $(document).ready( function () {    
-        // Initialize the datatable
-    $('#datatable').DataTable( {
+    // Initialize the datatable
+    var $datatable = $('#datatable').DataTable( {
             "processing": true,
             "ajax": "./Library.json",
             "columnDefs": [
@@ -21,18 +21,14 @@ $(document).ready( function () {
 		});
     
     // Update the listbox on the form for author filtering
-    UpdateFilterListBoxes();
-
-    // add another column
-    $('#datatable').DataTable();
+    UpdateFilterListBoxes();    
 
     // when selectlist value is changed, filter the datatable
-    $('.filter').change(function() {
-        var datatable = $('#datatable').DataTable();
+    $('.filter').change(function() {        
         var selectedValue = $('.select-list option:selected').text();
 
         // filter the table with the selected value
-        datatable.search(selectedValue).draw();        
+        $datatable.search(selectedValue).draw();        
     });
 
     //
@@ -40,10 +36,6 @@ $(document).ready( function () {
     //
     $('#search-button').click(function() { AnimateSelector('#search-button', 'jello') });
     $('#add-book-button').click(function() { AnimateSelector('#add-book-button', 'jello') });
-
-    $('#addbook-modal-save-button').click(function() {
-        swal("Book saved!", "Book has been added to the library.", "success");
-     });
 
     $('#filter-button').click(function() {
         AnimateSelector('#filter-button', 'jello');
@@ -53,6 +45,40 @@ $(document).ready( function () {
             opacity: "toggle"
         }, "slow");
     });
+
+    $('#search-button').click(function() {
+        swal({
+            title: "Search", 
+            text: "Search For:", 
+            type: "input", 
+            showCancelButton: true,
+            closeOnConfirm: false,      // change when done testing
+            inputPlaceholder: "Search Term",
+            allowOutsideClick: true,            
+            confirmButtonText: "Search",                        
+        },            
+            function(inputValue){
+                if (inputValue === false) return false;
+  
+                if (inputValue === "") {
+                    swal.showInputError("You need to write something!");
+                    return false;
+                }
+                
+                $datatable.search(inputValue).draw();
+
+                swal({
+                    title: "Nice!", 
+                    text: "Search term " + inputValue + " applied.", 
+                    type: "success",
+                    timer: 750
+                });
+            });
+     });
+
+    $('#addbook-modal-save-button').click(function() {
+        swal("Book saved!", "Book has been added to the library.", "success");
+     });    
 
     $('#add-author-button').click(function() { 
         AnimateSelector('#add-author-button', 'pulse');
