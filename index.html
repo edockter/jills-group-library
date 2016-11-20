@@ -7,13 +7,13 @@
   <meta name="description" content="Library for Jill's unit.'">
   <meta name="author" content="Eric Dockter">
   
-  <link href="//fonts.googleapis.com/css?family=EB+Garamond|Lobster" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Lobster" rel="stylesheet">
   <link rel="stylesheet" href="./css/animate.css">  
   <link rel="stylesheet" href="./css/bootstrap-flatly.min.css">
   <link rel="stylesheet" href="./css/style.css"> 
-  <link rel="stylesheet" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/af-2.1.2/fh-3.1.2/r-2.1.0/datatables.min.css"/>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/af-2.1.2/fh-3.1.2/r-2.1.0/datatables.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/css/bootstrap-select.min.css">
   
   <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/dt-1.10.12/af-2.1.2/datatables.min.css"/>-->
 
@@ -42,11 +42,11 @@
             <table id="datatable" class="cell-border">
                 <thead>
                     <tr>                        
-                        <th style="border: 1px solid lightgrey;">Title</th>
-                        <th style="border: 1px solid lightgrey;">Author<select id="author-list" class="filter select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select class="filter core-value-list select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select class="filter status-list select-list form-control" style="display: none;"><option value=""></option></select></th>
-                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select class="filter current-reader-list select-list form-control" style="display: none;"><option value=""></option></select></th>                        
+                        <th style="border: 1px solid lightgrey; ">Title</th>
+                        <th style="border: 1px solid lightgrey;">Author<br><select multiple id="author-list" class="filter form-control"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Core Value<select multiple class="filter core-value-list form-control"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Status<select class="filter status-list form-control"><option value=""></option></select></th>
+                        <th style="border: 1px solid lightgrey;" class="text-center">Current Reader<select class="filter current-reader-list form-control"><option value=""></option></select></th>                        
                     </tr>
                 </thead>                
             </table>
@@ -78,11 +78,11 @@
                     </div>
                     <div class="form-group">
                         <label for="core-value-input">Core Value</label>
-                        <select name="coreValueInput" id="core-value-input" class="core-value-list select-list form-control"><option value=""></option></select>
+                        <select name="coreValueInput" id="core-value-input" class="core-value-list form-control"><option value=""></option></select>
                     </div>
                     <div class="form-group">
                         <label for="status-input">Status</label>
-                        <select name="coreValueInput" id="status-input" class="status-list select-list form-control"><option value=""></option></select>
+                        <select name="coreValueInput" id="status-input" class="status-list form-control"><option value=""></option></select>
                     </div>
                 </div>
                 
@@ -96,11 +96,11 @@
     </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>   
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
   
     
     <script src="script.js"></script>

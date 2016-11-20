@@ -94,7 +94,7 @@ function UpdateFilterListBoxes() {
         // Append all unique authors from our list to the selectlist
         for (i = 0; i < authorList.length; i++) {
             $('#author-list').append('<option>' + authorList[i].toString() + '</option>');
-        }
+        }        
 
         // Process & append other lists too
         for (i = 0; i < masterList[0].length; i++) {
@@ -105,8 +105,13 @@ function UpdateFilterListBoxes() {
         }
         for (i = 0; i < masterList[2].length; i++) {
             $('.status-list').append('<option>' + masterList[2][i].toString() + '</option>');
-        }            
-    });
+        }         
+    }).done(function() {
+        // use selectpicker a lot so after population, refresh ALL of them and hide the filters
+        $('select').addClass('selectpicker');
+        $('.selectpicker').selectpicker('refresh');
+        $('.filter').selectpicker('hide');
+    });     
 };
 
 function ProcessAllLists(jsonData) {
@@ -167,7 +172,7 @@ function ProcessAuthorsList(jsonData) {
 };    
 
 function toggleFilter($elements) {
-    $elements.toggle();
+    $elements.slideToggle();
 }
 
 function AnimateSelector(selectorString, animationString) {
