@@ -170,14 +170,6 @@ function toggleFilter($elements) {
     $elements.toggle();
 }
 
-function JelloButton(selectorString) {
-    var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';    
-    
-    $(selectorString).addClass('animated jello').one(animationend,function() {
-          $(selectorString).removeClass('animated jello');
-        });
-}
-
 function AnimateSelector(selectorString, animationString) {
     var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';    
     
