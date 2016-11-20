@@ -9,3 +9,14 @@ body {
 .select-list {
     font-size: 18px !important;
 }
+.sweet-alert button, input, p {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+}
+.sweet-alert button.cancel {
+    color: black;
+    background-color: #F0F0F0 !important;
+}
+.sweet-alert button {
+    background-color: #337AB7 !important;
+}
