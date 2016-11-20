@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Lobster" rel="stylesheet">
   <link rel="stylesheet" href="./css/animate.css">  
   <link rel="stylesheet" href="./css/bootstrap-flatly.min.css">
-  <link rel="stylesheet" href="./css/style.css"> 
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./assets/font-awesome/css/font-awesome.css">  
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/af-2.1.2/fh-3.1.2/r-2.1.0/datatables.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.0/css/bootstrap-select.min.css">
@@ -32,9 +33,9 @@
         <div class="row  animated fadeInLeft">        
             <div class="col-lg-4 col-lg-offset-1">
                 <div class="btn-group">
-                    <button id="filter-button" class="btn btn-lg btn-danger">Filters</button>
-                    <button id="search-button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#searchBooks">Search</button>        
-                    <button id="add-book-button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#addBooks">Add Book</button>
+                    <button id="filter-button" class="btn btn-lg btn-danger">Filters<i class="fa fa-filter fa-fw" aria-hidden="true"></i></button>
+                    <button id="search-button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#searchBooks">Search<i class="fa fa-flip-horizontal fa-search fa-fw m-l-1" aria-hidden="true"></i></button>        
+                    <button id="add-book-button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#addBooks"><i class="fa fa-book fa-fw" aria-hidden="true"></i>Add Book</button>
                 </div>
             </div>
         </div>
@@ -115,10 +116,7 @@
                             <input type="text" class="form-control" id="book-title-input" placeholder="Title">                        
                         </div>
                         <div class="form-group">
-                            <label for="author-input">Author</label>
-                            <input name="author[]" type="text" class="form-control author-input" id="author-input" placeholder="Author">
-                            <div id="add-author-button" class="btn m-t-5"><small style="font-size: 14px; margin-left: 1%;">+ Add Author</small></div>
-                            <div id="remove-author-button" class="btn m-t-5" style="display: none;"><small style="font-size: 14px; margin-left: 1%;">- Remove Author</small></div>                        
+                            <label for="author-input">Author</label>                                                    
                         </div>
                         <div class="form-group">
                             <label for="core-value-input">Core Value</label>
