@@ -1,6 +1,7 @@
 body {
     font-family: 'EB Garamond', serif !important;
     font-size: 20px !important;
+    /*background: #fdfdf2  !important;*/
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', cursive !important;
