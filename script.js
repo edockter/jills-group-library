@@ -49,10 +49,27 @@ $(document).ready( function () {
 
     $('#search-button').click(function() { JelloButton('#search-button') });
     $('#add-book-button').click(function() { JelloButton('#add-book-button') });
+
+    $('#add-author-button').click(function() { 
+        JelloButton('#add-author-button');
+        
+        if ($('.author-input').length <= 1) {            
+            $('#remove-author-button').show();
+        }
+
+        $(this).before('<input name="author[]" type="text" class="author-input form-control" id="author-input" placeholder="Author">');
+     });
+
+     $('#remove-author-button').click(function() {
+         var authorBoxes = $('.author-input');
+         
+        authorBoxes[authorBoxes.length-1].remove();
+
+         if ($('.author-input').length <= 1) {
+            $('#remove-author-button').hide();
+        }        
+     })
 } );
-
-
-
 
 //
 // Function Definitions

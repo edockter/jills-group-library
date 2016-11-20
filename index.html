@@ -70,8 +70,9 @@
                     </div>
                     <div class="form-group">
                         <label for="author-input">Author</label>
-                        <input type="text" class="form-control" id="author-input" placeholder="Author">
-                        <small><div class="btn btn-sm btn-info m-t-5">Add Author</div></small>                        
+                        <input name="author[]" type="text" class="form-control author-input" id="author-input" placeholder="Author">
+                        <div id="add-author-button" class="btn m-t-5"><small style="font-size: 14px; margin-left: 1%;">+ Add Author</small></div>
+                        <div id="remove-author-button" class="btn m-t-5" style="display: none;"><small style="font-size: 14px; margin-left: 1%;">- Remove Author</small></div>                        
                     </div>
                     <div class="form-group">
                         <label for="core-value-input">Core Value</label>
