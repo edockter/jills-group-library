@@ -38,17 +38,17 @@ $(document).ready( function () {
     //
     // Click Listeners
     //
+    $('#search-button').click(function() { AnimateSelector('#search-button', 'jello') });
+    $('#add-book-button').click(function() { AnimateSelector('#add-book-button', 'jello') });
+
     $('#filter-button').click(function() {
-        JelloButton('#filter-button');
+        AnimateSelector('#filter-button', 'jello');
 
         $(".filter").animate({
             height: "toggle",
             opacity: "toggle"
         }, "slow");
     });
-
-    $('#search-button').click(function() { JelloButton('#search-button') });
-    $('#add-book-button').click(function() { JelloButton('#add-book-button') });
 
     $('#add-author-button').click(function() { 
         AnimateSelector('#add-author-button', 'pulse');
@@ -75,12 +75,12 @@ $(document).ready( function () {
                 $(this).remove();
          
                 if ($('.author-input').length <= 1) {
-                    $('#remove-author-button').fadeOut();
+                    $('#remove-author-button').fadeOut('fast');
                 }                
             }
         });                
-     })
-} );
+    })
+});
 
 //
 // Function Definitions
