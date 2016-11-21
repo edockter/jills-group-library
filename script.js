@@ -14,15 +14,15 @@ $(document).ready( function () {
                 { "data": "Status" },
                 { "data": "CurrentReader"}                
             ],
-			"paging": false,
-            "ordering": false,
+			"paging": false,            
+            "ordering": false,            
 			"searching": true,
             "sDom": '<"top"i>rt<"bottom"lp><"clear">'                        
 		});
     
     // Update the listbox on the form for author filtering
     UpdateFilterListBoxes();    
-
+    
     // when selectlist value is changed, filter the datatable
     $('.filter').change(function() {        
         var selectedValue = $('.select-list option:selected').text();
@@ -30,6 +30,9 @@ $(document).ready( function () {
         // filter the table with the selected value
         $datatable.search(selectedValue).draw();        
     });
+
+    // Set add button width match upper 2 buttons total width
+    $('#add-book-button').css('width', parseFloat($('#filter-button').css("width")) + parseFloat($('#search-button').css('width')));    
 
     //
     // Click Listeners
@@ -55,7 +58,8 @@ $(document).ready( function () {
             closeOnConfirm: false,      // change when done testing
             inputPlaceholder: "Search Term",
             allowOutsideClick: true,            
-            confirmButtonText: "Search",                        
+            confirmButtonText: "Search",
+            cancelButtonText: "Close"
         },            
             function(inputValue){
                 if (inputValue === false) return false;
@@ -68,16 +72,77 @@ $(document).ready( function () {
                 $datatable.search(inputValue).draw();
 
                 swal({
-                    title: "Nice!", 
+                    title: "Searched!", 
                     text: "Search term " + inputValue + " applied.", 
-                    type: "success",
-                    timer: 750
+                    type: "success",                    
                 });
             });
-     });
+    });
 
-    $('#addbook-modal-save-button').click(function() {
+    $('#author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+        // all selected <option> elements
+        var selections = event.currentTarget.selectedOptions;
+        var selectionsArray = [].slice.call(selections);       
+
+        // add ( for regex search, use slice.call() to convert HTMLCollection to array for processing
+        var searchString = '(';        
+        
+        if (selectionsArray[0] != null) {            
+            for (var i = 0; i < selectionsArray.length; i++){
+                searchString += selectionsArray[i].value + '|';
+            }
+
+            // chop off last pipe, add closing ) for regex
+            // replace all spaces with . -- . is regex for any character
+            searchString = searchString.slice(0, -1);   
+            searchString += ")";
+            searchString = searchString.replace(/ /g, '.');
+
+            $datatable.column(1).search(searchString, true).draw();            
+        }
+        else {
+            // clear search on this column, show everything since nothing is selected            
+            $datatable.column(1).search("").draw();
+            return;
+        }
+    });
+
+
+    
+    $('#addbook-modal-save-button').click(function(event) {
+        // prevent form submission
+        event.preventDefault();
+        var $form = $('#addBooksForm');        
+        var inputValues = {};
+        var ajaxURL = $form.attr('action');
+        var ajaxData = $form.serializeArray();        
+        // var ajaxPost = $.post( ajaxURL, ajaxData );
+        var formTitle = ajaxData[0].value;
+        var formAuthors = ajaxData[1].value;
+        var formCoreValue = ajaxData[2].value;
+        var formStatus = ajaxData[3].value;
+        // Uncomment this when I'm ready to actually post the form
+        // ajaxPost.done(function( data ) {
+            // collapse authors to string for row
+            var authorString = "";
+            // for (var i = 0; i < ajaxData.Author.length; i++) {
+            //     authorString += ajaxData.Author[i] + ', ';
+            // }
+            // authorString.slice(0, -2);
+
+            $datatable.row.add({
+            Title: formTitle,
+            Authors: formAuthors,
+            CoreValue: formCoreValue,            
+            Status: formStatus,
+            CurrentReader: ''
+            }).draw( false );
+
         swal("Book saved!", "Book has been added to the library.", "success");
+        // });
+        // ajaxPost.fail(function() {
+        //     swal("Save error.", "There was an error submitting the form.", "error");
+        // });    
      });    
 
     $('#add-author-button').click(function() { 
@@ -87,7 +152,7 @@ $(document).ready( function () {
             $('#remove-author-button').fadeIn();
         }
 
-        $(this).before('<input name="author[]" type="text" class="author-input form-control" id="author-input" placeholder="Author" style="margin;top: 2%; display: none;">');
+        $(this).before('<input name="Author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none;">');
         $(this).prev().css('opacity', 0)
         .slideDown('fast').animate(
             { opacity: 1 },
