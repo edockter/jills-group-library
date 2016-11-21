@@ -178,18 +178,18 @@ function UpdateFilterListBoxes() {
 
         // Append all unique authors from our list to the selectlist
         for (i = 0; i < authorList.length; i++) {
-            $('#author-list').append('<option>' + authorList[i].toString() + '</option>');
+            $('.author-list').append('<option>' + authorList[i].toString() + '</option>');
         }        
 
         // Process & append other lists too
         for (i = 0; i < masterList[0].length; i++) {
-            $('#core-value-list').append('<option>' + masterList[0][i].toString() + '</option>');
+            $('.core-value-list').append('<option>' + masterList[0][i].toString() + '</option>');
         }
         for (i = 0; i < masterList[1].length; i++) {
-            $('#current-reader-list').append('<option>' + masterList[1][i].toString() + '</option>');
+            $('.current-reader-list').append('<option>' + masterList[1][i].toString() + '</option>');
         }
         for (i = 0; i < masterList[2].length; i++) {
-            $('#status-list').append('<option>' + masterList[2][i].toString() + '</option>');
+            $('.status-list').append('<option>' + masterList[2][i].toString() + '</option>');
         }         
     }).done(function() {
         // use selectpicker a lot so after population, refresh ALL of them and hide the filters
