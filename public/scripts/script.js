@@ -193,7 +193,8 @@ function UpdateFilterListBoxes() {
         }         
     }).done(function() {
         // use selectpicker a lot so after population, refresh ALL of them and hide the filters
-        $('select').addClass('selectpicker');
+        $('select').addClass('selectpicker').attr('data-selected-text-format','count > 1');
+        $('.author-list').attr('data-selected-text-format', 'count > 2');
         $('.selectpicker').selectpicker('refresh');
         $('.filter').selectpicker('hide');
     });     
