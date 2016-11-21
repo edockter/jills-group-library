@@ -3,7 +3,7 @@ $(document).ready( function () {
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable( {
             "processing": true,
-            "ajax": "./Library.json",
+            "ajax": "./assets/Library.json",
             "columnDefs": [
                 {"className": "dt-center", "targets": [ 2, 3, 4 ]}
             ],
@@ -32,7 +32,7 @@ $(document).ready( function () {
     });
 
     // Set add button width match upper 2 buttons total width
-    $('#add-book-button').css('width', parseFloat($('#filter-button').css("width")) + parseFloat($('#search-button').css('width')));    
+    // $('#add-book-button').css('width', parseFloat($('#filter-button').css("width")) + parseFloat($('#search-button').css('width')));    
 
     //
     // Click Listeners
@@ -115,12 +115,16 @@ $(document).ready( function () {
         var $form = $('#addBooksForm');        
         var inputValues = {};
         var ajaxURL = $form.attr('action');
-        var ajaxData = $form.serializeArray();        
+        var ajaxData = $form.serializeArray();
+        var serialize = $form.serialize();        
         // var ajaxPost = $.post( ajaxURL, ajaxData );
+
         var formTitle = ajaxData[0].value;
         var formAuthors = ajaxData[1].value;
         var formCoreValue = ajaxData[2].value;
         var formStatus = ajaxData[3].value;
+
+        console.log(ajaxData);
         // Uncomment this when I'm ready to actually post the form
         // ajaxPost.done(function( data ) {
             // collapse authors to string for row
@@ -181,7 +185,7 @@ $(document).ready( function () {
 // Function Definitions
 //
 function UpdateFilterListBoxes() {        
-    $.getJSON("Library.json", function(json) {         
+    $.getJSON("./assets/Library.json", function(json) {         
         var data = json.data;
         var authorList = ProcessAuthorsList(json.data);
         var masterList = ProcessAllLists(json.data);  
