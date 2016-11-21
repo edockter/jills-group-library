@@ -79,19 +79,19 @@ $(document).ready( function () {
             });
     });
 
-    $('#author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+    $('.author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
         FilterSearchDatatable($datatable, event, 1);
     });
 
-    $('#core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+    $('.core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
         FilterSearchDatatable($datatable, event, 2);
     });
 
-    $('#status-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+    $('.status-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
         FilterSearchDatatable($datatable, event, 3);
     });
 
-    $('#current-reader-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+    $('.current-reader-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
         FilterSearchDatatable($datatable, event, 4);
     });    
     
