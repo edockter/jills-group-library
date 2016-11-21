@@ -28,17 +28,22 @@
         <div class="row animated fadeInLeft">
             <div class="col-lg-3 col-lg-offset-1">
                 <h1>Checkout System</h1>
-            </div>
+            </div>            
         </div>    
-        <div class="row  animated fadeInLeft">        
-            <div class="col-lg-4 col-lg-offset-1">
-                <div class="btn-group">
-                    <button id="filter-button" class="btn btn-lg btn-danger">Filters<i class="fa fa-filter fa-fw" aria-hidden="true"></i></button>
-                    <button id="search-button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#searchBooks">Search<i class="fa fa-flip-horizontal fa-search fa-fw m-l-1" aria-hidden="true"></i></button>        
-                    <button id="add-book-button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#addBooks"><i class="fa fa-book fa-fw" aria-hidden="true"></i>Add Book</button>
-                </div>
+        <div class="row  animated fadeInLeft ">
+            <div class="btn-group col-lg-3 col-lg-offset-1">
+                <button id="filter-button" class="btn btn-lg btn-danger text-black">Filters<i class="fa fa-filter fa-fw" aria-hidden="true"></i></button>
+                <button id="search-button" class="btn btn-lg btn-warning text-dark" data-toggle="modal" data-target="#searchBooks">Search<i class="fa fa-flip-horizontal fa-search fa-fw" aria-hidden="true"></i></button>        
+                
             </div>
+            
         </div>
+        <div class="row  animated fadeInLeft">
+            <div class="col-lg-3 col-lg-offset-1">        
+        <button id="add-book-button" class="btn btn-lg btn-info text-dark" data-toggle="modal" data-target="#addBooks"><i class="fa fa-book fa-fw" aria-hidden="true"></i>Add Book</button>
+        </div>
+        </div>
+
         <br/>
         <div class="row animated fadeInLeft">
             <div class="col-lg-10 col-lg-offset-1">
@@ -57,6 +62,7 @@
         </div>
 
     <!-- Modal for adding books -->
+    <form id="addBooksForm" method="post" action="/Books/Add/">
     <div class="modal fade" id="addBooks" tabindex="-1" role="dialog" aria-labelledby="addBooksLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -97,44 +103,47 @@
             </div>
         </div>
     </div>
+    </form>
 
     <!-- Modal for book details -->
-    <div class="modal fade" id="bookDetails" tabindex="-1" role="dialog" aria-labelledby="bookDetailsLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="bookDetailsLabel">Book Details</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="book-title-input">Book Title</label>
-                            <input type="text" class="form-control" id="book-title-input" placeholder="Title">                        
-                        </div>
-                        <div class="form-group">
-                            <label for="author-input">Author</label>                                                    
-                        </div>
-                        <div class="form-group">
-                            <label for="core-value-input">Core Value</label>
-                            <select name="coreValueInput" id="core-value-input" class="core-value-list form-control"><option value=""></option></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="status-input">Status</label>
-                            <select name="coreValueInput" id="status-input" class="status-list form-control"><option value=""></option></select>
-                        </div>
-                    </div>                
+    <form id="bookDetailsForm" method="post" action="/Books/Add/">
+        <div class="modal fade" id="bookDetails" tabindex="-1" role="dialog" aria-labelledby="bookDetailsLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="bookDetailsLabel">Book Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="book-title-input">Book Title</label>
+                                <input type="text" class="form-control" id="book-title-input" placeholder="Title">                        
+                            </div>
+                            <div class="form-group">
+                                <label for="author-input">Author</label>                                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="core-value-input">Core Value</label>
+                                <select name="coreValueInput" id="core-value-input" class="core-value-list form-control"><option value=""></option></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="status-input">Status</label>
+                                <select name="coreValueInput" id="status-input" class="status-list form-control"><option value=""></option></select>
+                            </div>
+                        </div>                
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="bookdetails-modal-save-button" type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    </div>
                 </div>
             </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="addbook-modal-save-button" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div><!-- End Container -->
 
