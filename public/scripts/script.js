@@ -79,26 +79,26 @@ $(document).ready( function () {
             });
     });
 
-    $('.author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+    $('.filter.author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
         FilterSearchDatatable($datatable, event, 1);
     });
 
-    $('.core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+    $('.filter.core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
         FilterSearchDatatable($datatable, event, 2);
     });
 
-    $('.status-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+    $('.filter.status-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
         FilterSearchDatatable($datatable, event, 3);
     });
 
-    $('.current-reader-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+    $('.filter.current-reader-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
         FilterSearchDatatable($datatable, event, 4);
     });    
     
     $('#addbook-modal-save-button').click(function(event) {
         // prevent form submission
         event.preventDefault();
-        var $form = $('#addBooksForm');        
+        var $form = $('#addBooksForm');
         var inputValues = {};
         var ajaxURL = $form.attr('action');
         var ajaxData = $form.serializeArray();
