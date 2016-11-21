@@ -80,34 +80,12 @@ $(document).ready( function () {
     });
 
     $('#author-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
-        // all selected <option> elements
-        var selections = event.currentTarget.selectedOptions;
-        var selectionsArray = [].slice.call(selections);       
-
-        // add ( for regex search, use slice.call() to convert HTMLCollection to array for processing
-        var searchString = '(';        
-        
-        if (selectionsArray[0] != null) {            
-            for (var i = 0; i < selectionsArray.length; i++){
-                searchString += selectionsArray[i].value + '|';
-            }
-
-            // chop off last pipe, add closing ) for regex
-            // replace all spaces with . -- . is regex for any character
-            searchString = searchString.slice(0, -1);   
-            searchString += ")";
-            searchString = searchString.replace(/ /g, '.');
-
-            $datatable.column(1).search(searchString, true).draw();            
-        }
-        else {
-            // clear search on this column, show everything since nothing is selected            
-            $datatable.column(1).search("").draw();
-            return;
-        }
+        FilterSearchDatatable($datatable, event, 1);
     });
 
-
+    $('#core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
+        FilterSearchDatatable($datatable, event, 2);
+    });    
     
     $('#addbook-modal-save-button').click(function(event) {
         // prevent form submission
@@ -197,13 +175,13 @@ function UpdateFilterListBoxes() {
 
         // Process & append other lists too
         for (i = 0; i < masterList[0].length; i++) {
-            $('.core-value-list').append('<option>' + masterList[0][i].toString() + '</option>');
+            $('#core-value-list').append('<option>' + masterList[0][i].toString() + '</option>');
         }
         for (i = 0; i < masterList[1].length; i++) {
-            $('.current-reader-list').append('<option>' + masterList[1][i].toString() + '</option>');
+            $('#current-reader-list').append('<option>' + masterList[1][i].toString() + '</option>');
         }
         for (i = 0; i < masterList[2].length; i++) {
-            $('.status-list').append('<option>' + masterList[2][i].toString() + '</option>');
+            $('#status-list').append('<option>' + masterList[2][i].toString() + '</option>');
         }         
     }).done(function() {
         // use selectpicker a lot so after population, refresh ALL of them and hide the filters
@@ -212,6 +190,34 @@ function UpdateFilterListBoxes() {
         $('.filter').selectpicker('hide');
     });     
 };
+
+function FilterSearchDatatable($datatable, event, columnNumber) {
+    // all selected <option> elements
+    var selections = event.currentTarget.selectedOptions;
+    var selectionsArray = [].slice.call(selections);       
+
+    // add ( for regex search, use slice.call() to convert HTMLCollection to array for processing
+    var searchString = '(';        
+    
+    if (selectionsArray[0] != null) {            
+        for (var i = 0; i < selectionsArray.length; i++){
+            searchString += selectionsArray[i].value + '|';
+        }
+
+        // chop off last pipe, add closing ) for regex
+        // replace all spaces with . -- . is regex for any character
+        searchString = searchString.slice(0, -1);   
+        searchString += ")";
+        searchString = searchString.replace(/ /g, '.');
+
+        $datatable.column(columnNumber).search(searchString, true).draw();            
+    }
+    else {
+        // clear search on this column, show everything since nothing is selected            
+        $datatable.column(columnNumber).search("").draw();
+        return;
+    }
+}
 
 function ProcessAllLists(jsonData) {
     var coreValueList = [];
