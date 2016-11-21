@@ -85,6 +85,14 @@ $(document).ready( function () {
 
     $('#core-value-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {        
         FilterSearchDatatable($datatable, event, 2);
+    });
+
+    $('#status-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+        FilterSearchDatatable($datatable, event, 3);
+    });
+
+    $('#current-reader-list').on('changed.bs.select', function(event, clickedIndex, newValue, oldValue) {
+        FilterSearchDatatable($datatable, event, 4);
     });    
     
     $('#addbook-modal-save-button').click(function(event) {
