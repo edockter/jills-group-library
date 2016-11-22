@@ -11,7 +11,7 @@ const connectionString = process.env.DATABASE_URL;
 
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(
-    __dirname, '..', '/index.html'));
+    __dirname, '..', '/public/', 'index.html'));
 });
 
 router.post('/api/books', (req, res, next) => {
