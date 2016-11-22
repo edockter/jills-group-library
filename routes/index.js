@@ -68,7 +68,7 @@ router.post('/api/books', (req, res, next) => {
 router.get('/api/books', (req, res, next) => {
   const results = [];
   // Get a Postgres client from the connection pool
-  pg.connect(connectionObject, (err, client, done) => {
+  pg.connect(connectionString, (err, client, done) => {
     // Handle connection errors
     if(err) {
       done();
