@@ -23,7 +23,7 @@ router.post('/api/books', (req, res, next) => {
       Author: req.body.Author };
   
   // Get a Postgres client from the connection pool
-  pg.connect(connectionsString, (err, client, done) => {
+  pg.connect(connectionString, (err, client, done) => {
         // Handle connection errors
         if(err) {
             done();
