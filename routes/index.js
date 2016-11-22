@@ -38,12 +38,15 @@ router.post('/api/books', (req, res, next) => {
         [data.Title, data.CoreValue, data.Status, data.CurrentReader], function(err, result) {
             if (err) {
                 // error
+                done();
+                console.log(err);
+                return res.status(500).json({success: false, data: err});
             }
             else {
                 // grab returned bookId so we can put it in the Authors table as FK
                 var newID = result.rows[0].bookid;                
                 var authorData = data.Author;
-                
+
                 if (util.isArray(authorData)) {
                     for (var i = 0; i < authorData.length; i++) {
                         const authorQuery = client.query('INSERT INTO authors(AuthorName, bookId) values($1, $2)',
@@ -67,8 +70,7 @@ router.post('/api/books', (req, res, next) => {
 
         // After all data is returned, close connection and return results    
         query.on('end', () => {
-            done();
-            console.log(results);
+            done();            
             return res.json(results);
         });
     });
@@ -85,7 +87,7 @@ router.get('/api/books', (req, res, next) => {
       return res.status(500).json({success: false, data: err});
     }
     // Concatenate all authors to a single string, return { id, title, authors, corevalue, status, currentreader }    
-    const query = client.query("SELECT authors.bookId, array_to_string(array_agg(distinct authors.authorname),', ') AS Authors, books.title, books.corevalue, books.status, books.currentreader FROM authors JOIN books on authors.bookId = books.bookId GROUP BY authors.bookId, books.bookId");
+    const query = client.query("SELECT authors.bookId, array_to_string(array_agg(distinct authors.authorname),', ') AS Authors, books.title, books.corevalue, books.status, books.currentreader FROM authors JOIN books on authors.bookId = books.bookId GROUP BY authors.bookId, books.bookId ORDER BY books.Title");
     
     // Stream results back one row at a time
     query.on('row', (row) => {
