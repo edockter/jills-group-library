@@ -3,16 +3,17 @@ $(document).ready( function () {
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable( {
             "processing": true,
+            "sAjaxDataProp": "",
             "ajax": "/api/books",
             "columnDefs": [
                 {"className": "dt-center", "targets": [ 2, 3, 4 ]}
             ],
             "columns": [                 
-                { "data": "Title" },
-                { "data": "Authors" },
-                { "data": "CoreValue" },
-                { "data": "Status" },
-                { "data": "CurrentReader"}                
+                { "data": "title" },
+                { "data": "authors" },
+                { "data": "corevalue" },
+                { "data": "status" },
+                { "data": "currentreader"}                
             ],
 			"paging": false,            
             "ordering": false,            
@@ -103,36 +104,30 @@ $(document).ready( function () {
         var ajaxURL = $form.attr('action');
         var ajaxData = $form.serializeArray();
         var serialize = $form.serialize();        
-        // var ajaxPost = $.post( ajaxURL, ajaxData );
+        var ajaxPost = $.post( ajaxURL, ajaxData );
 
         var formTitle = ajaxData[0].value;
         var formAuthors = ajaxData[1].value;
         var formCoreValue = ajaxData[2].value;
-        var formStatus = ajaxData[3].value;
+        var formStatus = ajaxData[3].value;        
+        
+        ajaxPost.done(function( data ) {                      
+            // $datatable.row.add({
+            // Title: formTitle,
+            // Authors: formAuthors,
+            // CoreValue: formCoreValue,            
+            // Status: formStatus,
+            // CurrentReader: ''
+            // }).draw( false );
 
-        console.log(ajaxData);
-        // Uncomment this when I'm ready to actually post the form
-        // ajaxPost.done(function( data ) {
-            // collapse authors to string for row
-            var authorString = "";
-            // for (var i = 0; i < ajaxData.Author.length; i++) {
-            //     authorString += ajaxData.Author[i] + ', ';
-            // }
-            // authorString.slice(0, -2);
+            $datatable.ajax.reload();
 
-            $datatable.row.add({
-            Title: formTitle,
-            Authors: formAuthors,
-            CoreValue: formCoreValue,            
-            Status: formStatus,
-            CurrentReader: ''
-            }).draw( false );
+            swal("Book saved!", "Book has been added to the library.", "success");
+        });
 
-        swal("Book saved!", "Book has been added to the library.", "success");
-        // });
-        // ajaxPost.fail(function() {
-        //     swal("Save error.", "There was an error submitting the form.", "error");
-        // });    
+        ajaxPost.fail(function() {
+            swal("Save error.", "There was an error submitting the form.", "error");
+        });    
      });    
 
     $('#add-author-button').click(function() { 
