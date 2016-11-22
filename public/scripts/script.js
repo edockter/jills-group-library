@@ -3,7 +3,7 @@ $(document).ready( function () {
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable( {
             "processing": true,
-            "ajax": "./assets/Library.json",
+            "ajax": "/api/books",
             "columnDefs": [
                 {"className": "dt-center", "targets": [ 2, 3, 4 ]}
             ],
