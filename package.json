@@ -2,9 +2,9 @@
   "name": "library",
   "version": "0.9.1",
   "description": "Application to organize and serve the public library for a small group.",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
