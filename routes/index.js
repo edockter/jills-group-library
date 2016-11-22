@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
+var util = require('util');
 var pg = require('pg');
 pg.defaults.ssl.true;
+
 const router = express.Router();
 
 // Replace with YOUR connection string, or add to .env file.
@@ -39,12 +41,19 @@ router.post('/api/books', (req, res, next) => {
             }
             else {
                 // grab returned bookId so we can put it in the Authors table as FK
-                var newID = result.rows[0].bookid;
-
-                 for (var i = 0; i < data.Author.length; i++) {
+                var newID = result.rows[0].bookid;                
+                var authorData = data.Author;
+                
+                if (util.isArray(authorData)) {
+                    for (var i = 0; i < authorData.length; i++) {
+                        const authorQuery = client.query('INSERT INTO authors(AuthorName, bookId) values($1, $2)',
+                        [authorData[i], newID]);
+                    }
+                }
+                else {
                     const authorQuery = client.query('INSERT INTO authors(AuthorName, bookId) values($1, $2)',
-                    [data.Author[i], newID]);
-                }                
+                        [authorData, newID]);
+                }
             }
         });
                 
