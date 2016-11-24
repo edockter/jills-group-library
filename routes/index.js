@@ -14,6 +14,60 @@ router.get('/', (req, res, next) => {
     __dirname, '..', '/public/', 'index.html'));
 });
 
+router.get('/api/books/:bookid', (req, res, next) => {
+    const results = [];
+    const bookid = req.params.bookid;
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, (err, client, done) => {
+        // Handle connection errors
+        if(err) {
+            done();
+            console.log(err);
+            return res.status(500).json({success: false, data: err});
+        }
+    // Concatenate all authors to a single string, return { id, title, authors, corevalue, status, currentreader }    
+    const query = client.query("SELECT authors.bookId, array_to_string(array_agg(distinct authors.authorname),', ') AS Authors, books.title, books.corevalue, books.status, books.currentreader FROM authors JOIN books on authors.bookId = books.bookId  WHERE books.bookid = ($1) GROUP BY authors.bookId, books.bookId ORDER BY books.Title", [bookid]);
+    
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
+
+router.get('/api/books', (req, res, next) => {
+  const results = [];
+  // Get a Postgres client from the connection pool
+  pg.connect(connectionString, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    // Concatenate all authors to a single string, return { id, title, authors, corevalue, status, currentreader }    
+    const query = client.query("SELECT authors.bookId, array_to_string(array_agg(distinct authors.authorname),', ') AS Authors, books.title, books.corevalue, books.status, books.currentreader FROM authors JOIN books on authors.bookId = books.bookId GROUP BY authors.bookId, books.bookId ORDER BY books.Title");
+    
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
+
 router.post('/api/books', (req, res, next) => {
   const results = [];
   // Grab data from http request
@@ -93,31 +147,7 @@ router.post('/api/books', (req, res, next) => {
     });
 });
 
-router.get('/api/books', (req, res, next) => {
-  const results = [];
-  // Get a Postgres client from the connection pool
-  pg.connect(connectionString, (err, client, done) => {
-    // Handle connection errors
-    if(err) {
-      done();
-      console.log(err);
-      return res.status(500).json({success: false, data: err});
-    }
-    // Concatenate all authors to a single string, return { id, title, authors, corevalue, status, currentreader }    
-    const query = client.query("SELECT authors.bookId, array_to_string(array_agg(distinct authors.authorname),', ') AS Authors, books.title, books.corevalue, books.status, books.currentreader FROM authors JOIN books on authors.bookId = books.bookId GROUP BY authors.bookId, books.bookId ORDER BY books.Title");
-    
-    // Stream results back one row at a time
-    query.on('row', (row) => {
-      results.push(row);
-    });
 
-    // After all data is returned, close connection and return results
-    query.on('end', () => {
-      done();
-      return res.json(results);
-    });
-  });
-});
 
 router.put('/api/books/:bookid', (req, res, next) => {
     const results = [];
