@@ -6,9 +6,11 @@ $(document).ready( function () {
             "sAjaxDataProp": "",
             "ajax": "/api/books",
             "columnDefs": [
-                {"className": "dt-center", "targets": [ 2, 3, 4 ]}
+                { "visible": false, "targets": 0 },  
+                { "className": "dt-center", "targets": [ 2, 3, 4 ] }
             ],
-            "columns": [                 
+            "columns": [
+                { "data": "bookid"},
                 { "data": "title" },
                 { "data": "authors" },
                 { "data": "corevalue" },
@@ -38,6 +40,10 @@ $(document).ready( function () {
     //
     // Click Listeners
     //
+    $('#datatable').on('click', 'tr', function () {        
+        $('#bookDetails').modal("show");
+    });
+    
     $('#search-button').click(function() { AnimateSelector('#search-button', 'jello') });
     $('#add-book-button').click(function() { AnimateSelector('#add-book-button', 'jello') });
 
