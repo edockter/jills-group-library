@@ -1,21 +1,35 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Launch Chrome against localhost, with sourcemaps",
-            "type": "chrome",
+        {            
+            "type": "node",
             "request": "launch",
-            "url": "http://localhost:8080",
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}"
+            "name": "Launch Program",
+            "program": "${workspaceRoot}/app.js",
+            "cwd": "${workspaceRoot}"
         },
         {
-            "name": "Attach to Chrome, with sourcemaps",
-            "type": "chrome",
+            "type": "node",
             "request": "attach",
-            "port": 9222,
-            "sourceMaps": true,
-            "webRoot": "${workspaceRoot}"
+            "address": "localhost",
+            "name": "Attach to Process",
+            "port": 5858
         }
+        // {
+        //     "name": "Launch Chrome against localhost, with sourcemaps",
+        //     "type": "chrome",
+        //     "request": "launch",
+        //     "url": "http://localhost:8080",
+        //     "sourceMaps": true,
+        //     "webRoot": "${workspaceRoot}"
+        // },
+        // {
+        //     "name": "Attach to Chrome, with sourcemaps",
+        //     "type": "chrome",
+        //     "request": "attach",
+        //     "port": 9222,
+        //     "sourceMaps": true,
+        //     "webRoot": "${workspaceRoot}"
+        // }
     ]
 }
