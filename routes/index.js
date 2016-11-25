@@ -154,11 +154,14 @@ router.put('/api/books/:bookid', (req, res, next) => {
     const bookid = req.params.bookid;
     // Grab data from http request
     const data = { 
-        Title: req.body.title, 
-        CoreValue: req.body.corevalue, 
-        Status: req.body.status, 
-        CurrentReader: req.body.currentReader, 
-        Author: req.body.author };
+        title: req.body[0].value, 
+        corevalue: req.body[2].value, 
+        status: req.body[3].value, 
+        currentreader: req.body[4].value,
+        Author: req.body[1].value };
+
+    console.log('data: ' + JSON.stringify(data));
+    console.log('req.body: ' + JSON.stringify(req.body));
   
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, (err, client, done) => {
@@ -171,7 +174,7 @@ router.put('/api/books/:bookid', (req, res, next) => {
         
         // update row in Books table, on success, update Authors
         client.query('UPDATE books SET title=($1), corevalue=($2), status=($3), currentreader=($4) WHERE bookid=($5)',
-        [data.Title, data.CoreValue, data.Status, data.CurrentReader, bookid], function(err, result) {
+        [data.title, data.corevalue, data.status, data.currentreader, bookid], function(err, result) {
             if (err) {
                 // error
                 done();
@@ -283,6 +286,32 @@ router.delete('/api/books/:bookid', (req, res, next) => {
         done();
         return res.json(results);
         });
+  });
+});
+
+router.get('/api/authors/', (req, res, next) => {
+  const results = [];
+  // Get a Postgres client from the connection pool
+  pg.connect(connectionString, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    // Concatenate all authors to a single string, return { id, title, authors, corevalue, status, currentreader }    
+    const query = client.query("SELECT DISTINCT AuthorName AS Author FROM authors ORDER BY AuthorName");
+    
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
   });
 });
 
