@@ -22,11 +22,6 @@ $(document).ready( function () {
 			"searching": true,
             "sDom": '<"top"i>rt<"bottom"lp><"clear">',
             "initComplete":function(settings, json) {
-                $('tr td:first-child').click(function() { 
-                    var clickedBookId = $datatable.row(this).data().bookid;
-                    PopulateModal(clickedBookId);
-                });
-
                 // Update the listbox on the form for author filtering
                 UpdateFilterListBoxes(json);
             } 
@@ -46,13 +41,26 @@ $(document).ready( function () {
     //
     // Click Listeners
     //
+    $('#datatable').on('click', 'tr td:first-child', function() { 
+        var clickedBookId = $datatable.row(this).data().bookid;
+        PopulateModal(clickedBookId);
+    });
+
+    $('#bookDetails').on('hidden.bs.modal', function () {
+        // reset form controls
+        $('.details-output').show().text('');
+        $('.details-control').hide().val('');
+        $('details-modal-save-button').hide();
+    })
     $('.btn-lg').click(function() {
         AnimateSelector('#' + $(this).attr('id'), 'jello');        
     });
     $('#details-modal-edit-button').click(function() {         
         AnimateSelector('#details-output', 'slideOutUp');
-        $('.details-output').fadeToggle();
-        $('.details-control').fadeToggle();
+        $('.details-output').fadeToggle('fast', 'swing', function() {
+            $('.details-control').fadeToggle();
+        });
+        
         // $('.details-output').fadeOut(1000, function() {
         //     AnimateSelector('.details-output', 'slideOutUp');
         // });
