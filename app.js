@@ -10,7 +10,6 @@ var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.text());
 
 app.use('/css', express.static('public/css'));
 app.use('/assets', express.static('public/assets'));
