@@ -7,7 +7,7 @@ $(document).ready( function () {
             "ajax": "/api/books",
             "columnDefs": [
                 { "visible": false, "targets": 0 },
-                { "className": "dt-center", "targets": [ 2, 3, 4 ] }
+                { "className": "dt-center", "targets": [ 2, 3, 4, 5 ] }                
             ],
             "columns": [
                 { "data": "bookid"},
@@ -15,7 +15,8 @@ $(document).ready( function () {
                 { "data": "authors" },
                 { "data": "corevalue" },
                 { "data": "status" },
-                { "data": "currentreader"}                
+                { "data": "currentreader", 
+                    "defaultContent": "<button class='btn'>Click!</button>"}
             ],
 			"paging": false,            
             "ordering": false,            
@@ -55,26 +56,27 @@ $(document).ready( function () {
     });
 
     $('.btn-lg').click(function() {
-        AnimateSelector('#' + $(this).attr('id'), 'jello');        
+        AnimateSelector($(this), 'jello');        
     });
     $('#details-modal-edit-button').click(function() {         
-        AnimateSelector('#details-output', 'slideOutUp');
-        AnimateSelector('.details-control', 'slideInUp');
+        AnimateSelector($('#details-output'), 'slideOutUp');
+        AnimateSelector($('.details-control'), 'slideInUp');
         $('.details-output').stop(true,true).fadeToggle('fast', 'swing');
         $('.details-control').stop(true, true).fadeToggle('fast', 'swing');
         
         $('#details-modal-save-button').fadeToggle();        
-        AnimateSelector('#details-modal-save-button', 'slideInUp');        
+        AnimateSelector($('#details-modal-save-button'), 'slideInUp');        
     });
     
-    $('#filter-button').click(function() {
+    $('#filter-button').click(function() {        
         $(".filter").animate({
             height: "toggle",
             opacity: "toggle"
-        }, "slow");
+        }, "slow").selectpicker('deselectAll');        
     });
 
     $('#search-button').click(function() {
+        $datatable.search('').draw();
         swal({
             title: "Search", 
             text: "Search For:", 
@@ -85,7 +87,7 @@ $(document).ready( function () {
             allowOutsideClick: true,            
             confirmButtonText: "Search",
             cancelButtonText: "Close"
-        },            
+        },
             function(inputValue){
                 if (inputValue === false) return false;
   
@@ -418,12 +420,12 @@ function toggleFilter($elements) {
     $elements.slideToggle();
 }
 
-function AnimateSelector(selectorString, animationString) {
+function AnimateSelector($element, animationString) {
     var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';    
     
-    $(selectorString).addClass('animated ' + animationString).one(animationend,function() {
-          $(selectorString).removeClass('animated ' + animationString);
+    $element.addClass('animated ' + animationString).one(animationend,function() {
+          $element.removeClass('animated ' + animationString);
         });
 
-        return $(selectorString);
+        return $element;
 }
