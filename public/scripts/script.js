@@ -49,30 +49,22 @@ $(document).ready( function () {
     $('#bookDetails').on('hidden.bs.modal', function () {
         // reset form controls
         $('.details-output').show().text('');
-        $('.details-control').hide().val('');
-        $('details-modal-save-button').hide();
-    })
+        $('input.details-author').remove();
+        $('.details-control').hide().val('');        
+        $('#details-modal-save-button').css('display', 'hidden');
+    });
+
     $('.btn-lg').click(function() {
         AnimateSelector('#' + $(this).attr('id'), 'jello');        
     });
     $('#details-modal-edit-button').click(function() {         
         AnimateSelector('#details-output', 'slideOutUp');
-        $('.details-output').fadeToggle('fast', 'swing', function() {
-            $('.details-control').fadeToggle();
-        });
-        
-        // $('.details-output').fadeOut(1000, function() {
-        //     AnimateSelector('.details-output', 'slideOutUp');
-        // });
-
-        // $('.details-control').fadeIn(1000, function() {
-        //     AnimateSelector('.details-control', 'slideInUp');
-        // });
-        
+        AnimateSelector('.details-control', 'slideInUp');
+        $('.details-output').stop(true,true).fadeToggle('fast', 'swing');
+        $('.details-control').stop(true, true).fadeToggle('fast', 'swing');
         
         $('#details-modal-save-button').fadeToggle();        
-        AnimateSelector('#details-modal-save-button', 'slideInUp');
-        
+        AnimateSelector('#details-modal-save-button', 'slideInUp');        
     });
     
     $('#filter-button').click(function() {
@@ -137,7 +129,10 @@ $(document).ready( function () {
         var ajaxPost = $.post( ajaxURL, ajaxData );
        
         ajaxPost.done(function( data ) {
-            $datatable.ajax.reload();
+            $datatable.ajax.reload().draw();
+            $( '#addBooksForm' ).each(function(){
+                this.reset();
+            });           
 
             swal("Book saved!", "Book has been added to the library.", "success");
         });
@@ -151,34 +146,38 @@ $(document).ready( function () {
         // prevent form submission
         event.preventDefault();        
         var $form = $('#bookDetailsForm');
-        
-        var inputValues = {};        
+        var serializedForm = $form.serialize();
         var ajaxURL = $form.attr('action') + $('.details-book-id').val();
-        $('.details-book-id').remove();
-        var ajaxData = $form.serializeArray();
-        var serialize = $form.serialize();        
-        var json = $form;
 
-        console.log($form);
-        console.log(ajaxData);
-        console.log(serialize);
-
-        console.log('ajaxUrl: ' + ajaxURL);        
         var ajaxPut = $.ajax({ 
             url: ajaxURL, 
-            type: 'PUT',
-            //headers: {"X-HTTP-Method-Override": "PUT"}, // X-HTTP-Method-Override set to PUT.
-            data: JSON.stringify(ajaxData),
-            contentType: "application/json; charset=utf-8",            
+            type: 'PUT',            
+            data: serializedForm,                        
         });
         
-        ajaxPut.done(function( data ) {
-            $datatable.ajax.reload();
-
+        ajaxPut.done(function( data ) {            
+            $('.details-output').show().text('');
+            $('input.details-author').remove();
+            $('.details-control').hide().val('');        
+            $('#details-modal-save-button').hide();
+            $( '#addBooksForm' ).each(function(){
+                this.reset();
+            });
             swal("Book saved!", "Book information has been updated.", "success");
+
+            // datatable was loading too fast, before PUT data was available in table
+            setTimeout(function() { $datatable.ajax.reload().draw(); }, 500);
+            
         });
 
         ajaxPut.fail(function( jqXHR, textStatus, errorThrown ) {
+             $('.details-output').show().text('');
+            $('input.details-author').remove();
+            $('.details-control').hide().val('');        
+            $('#details-modal-save-button').hide();
+            $( '#addBooksForm' ).each(function(){
+                this.reset();
+            });
             swal("Save error.", "There was an error submitting the form.  " + errorThrown, "error");
             console.log(jqXHR);
             console.log(textStatus);
@@ -188,20 +187,19 @@ $(document).ready( function () {
 
     $('#details-modal-delete-button').click(function(event) {
         // prevent form submission
-        event.preventDefault();        
-        var $form = $('#bookDetailsForm');                
-        var ajaxURL = $form.attr('action') + $('.details-book-id').val();        
+        event.preventDefault();
+        var $form = $('#bookDetailsForm');
+        var ajaxURL = $form.attr('action') + $('.details-book-id').val();
                
-        var ajaxPut = $.ajax({ 
-            url: ajaxURL, 
-            type: 'DELETE',
-            //headers: {"X-HTTP-Method-Override": "PUT"}, // X-HTTP-Method-Override set to PUT.
-            //data: JSON.stringify(ajaxData),
+        var ajaxPut = $.ajax({
+            url: ajaxURL,
+            type: 'DELETE',            
             contentType: "application/json; charset=utf-8",            
         });
         
         ajaxPut.done(function( data ) {
             $datatable.ajax.reload();
+            $('#bookDetails').modal('hide');
 
             swal("Book deleted!", "Book has been deleted from the system.", "success");
         });
@@ -252,6 +250,9 @@ $(document).ready( function () {
 // gets book details from API and loads to modal.
 function PopulateModal(clickedBookId) {
     $('.details-control').hide();
+    
+    $('#details-modal-save-button').hide();
+    
     var ajaxRequest = $.ajax({
         url: "api/books/" + clickedBookId,
         type: "GET",
@@ -259,24 +260,38 @@ function PopulateModal(clickedBookId) {
         dataType: "json",
         success: function(data, textStatus, jqXHR) {
             SetOutput($('.details-book-id'), clickedBookId);
-            SetOutput($('.details-title'), data[0].title);
-            SetOutput($('.details-author'), data[0].authors);            
+            SetOutput($('.details-title'), data[0].title);                        
             SetOutput($('.details-status'), data[0].status);
+            SetOutput($('p.details-author'), data[0].authors);
             SetOutput($('.details-reader'), data[0].currentreader);
-            SetOutput($('.details-core-value'), data[0].corevalue);            
-            $('#bookDetails').modal("show");
-        },
-        error: function(data, textStatus, jqXHR) {
-            console.log('error: ' + jqXHR);
-            return 'error';
-        }
+            SetOutput($('.details-core-value'), data[0].corevalue);
+
+            var ajaxRequest = $.ajax({
+            url: "api/authors/" + clickedBookId,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function(data, textStatus, jqXHR) {                
+                for(var i = 0; i < data.length; i++) {
+                    $('.author-group').append('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');                    
+                    $('input.details-author').last().val(data[i].author);
+                    console.log('author: ' + data[i].author);                    
+                }                
+                $('#bookDetails').modal("show");
+            },
+            error: function(data, textStatus, jqXHR) {
+                console.log('error: ' + jqXHR);
+                return 'error';
+            }
+            });
+        }        
     });
 }
 
 function SetOutput ($object, textValue) {
     $.each($object, function(index, item) {
         if ($(item).is('input')) {
-            $(item).attr('value', textValue || 'None');
+            $(item).val(textValue || 'None');
         }
         else if ($(item).is('p')) {
             $(item).text(textValue || 'None');
@@ -410,4 +425,6 @@ function AnimateSelector(selectorString, animationString) {
     $(selectorString).addClass('animated ' + animationString).one(animationend,function() {
           $(selectorString).removeClass('animated ' + animationString);
         });
+
+        return $(selectorString);
 }
