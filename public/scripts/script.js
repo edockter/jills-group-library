@@ -215,7 +215,7 @@ $(document).ready( function () {
      });  
 
     $('#add-author-button').click(function() { 
-        AnimateSelector('#add-author-button', 'pulse');
+        AnimateSelector($('#add-author-button'), 'pulse');
         
         if ($('.author-input').length <= 1) {            
             $('#remove-author-button').fadeIn();
