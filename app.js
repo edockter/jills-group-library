@@ -1,18 +1,20 @@
 var express = require('express');
 var path = require('path');
 var env = require('dotenv').config();
-const pg = require('pg');
-const bodyParser = require('body-parser');
-
-const routes = require('./routes/index');
+var morgan = require('morgan');
+var pg = require('pg');
+var bodyParser = require('body-parser');
 
 var app = express();
+
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
 
 app.use('/css', express.static('public/css'));
 app.use('/assets', express.static('public/assets'));
 app.use('/scripts', express.static('public/scripts'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -20,6 +22,8 @@ var port = process.env.PORT || 8080;
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+
+const routes = require('./routes/index');
 
 app.use('/', routes);
 
