@@ -274,8 +274,7 @@ function PopulateModal(clickedBookId) {
             success: function(data, textStatus, jqXHR) {                
                 for(var i = 0; i < data.length; i++) {
                     $('.author-group').append('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');                    
-                    $('input.details-author').last().val(data[i].author);
-                    console.log('author: ' + data[i].author);                    
+                    $('input.details-author').last().val(data[i].author);                                        
                 }                
                 $('#bookDetails').modal("show");
             },
