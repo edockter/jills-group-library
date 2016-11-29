@@ -74,7 +74,7 @@ $(document).ready( function () {
             height: "toggle",
             opacity: "toggle"
         }, "slow");
-        $('filter').selectpicker('deselectAll');        
+        $('.filter').selectpicker('deselectAll');        
     });
 
     $('#search-button').click(function() {
