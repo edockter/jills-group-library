@@ -15,14 +15,15 @@ $(document).ready( function () {
                 { "data": "authors" },
                 { "data": "corevalue" },
                 { "data": "status" },
-                { "data": "currentreader", 
-                    "defaultContent": "<button class='btn'>Click!</button>"}
+                { "data": "currentreader"}
+                // , 
+                //     "defaultContent": "<button class='btn'>Click!</button>"}
             ],
 			"paging": false,            
             //"ordering": false,
             //"dom": 'lrtip',
 			"searching": true,
-            "dom": '<"top">t<"bottom"ilp><"clear">',
+            "dom": '<"top">it<"bottom"lp><"clear">',
             "initComplete":function(settings, json) {
                 // Update the listbox on the form for author filtering
                 UpdateFilterListBoxes(json);

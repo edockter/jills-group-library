@@ -89,11 +89,13 @@
                         </div>
                         <div class="form-group">
                             <label for="core-value-input">Core Value</label>
-                            <select name="CoreValue" id="core-value-input" class="core-value-list form-control"><option value=""></option></select>
+                            <!-- <select name="CoreValue" id="core-value-input" class="core-value-list form-control"><option value=""></option></select>-->
+                            <input name="CoreValue" type="text" id="core-value-input" class="core-value-input form-control" placeholder="Core Value">
                         </div>
                         <div class="form-group">
                             <label for="status-input">Status</label>
-                            <select name="Status" id="status-input" class="status-list form-control"><option value=""></option></select>
+                            <!-- <select name="Status" id="status-input" class="status-list form-control"><option value=""></option></select> -->
+                            <input name="Status" type="text" id="status-input" class="status-input form-control" placeholder="Current Status">
                         </div>
                     </div>                
                 </div>
@@ -131,23 +133,28 @@
                             </div>
                             <div class="form-group author-group">
                                 <label id="details-author-label "for="author-input">Authors</label>
-                                <p id="details-author-output" class="details-output details-author">None</p>
-                                <!--<input name="author" type="text" class="form-control details-control details-author" id="details-author-input" placeholder="Author" style="display: none;"> -->
+                                <p id="details-author-output" class="details-output details-author">None</p>                                
                             </div>
                             <div class="form-group">
                                 <label for="core-value-input">Core Value</label>
                                 <p id="details-core-value-output" class="details-output details-core-value">None</p>
-                                <select name="corevalue" id="details-core-value-input" class="core-value-list form-control details-control details-core-value" style="display: none;"><option value=""></option></select>
+                                <!--<select name="corevalue" id="details-core-value-input" class="core-value-list form-control details-control details-core-value" style="display: none;"><option value=""></option></select>-->
+                                <input name="corevalue" id="details-core-value-input" class="core-value-input form-control details-control details-core-value" style="display: none;">
+                                
                             </div>
                             <div class="form-group">
                                 <label for="status-input">Status</label>
                                 <p id="details-status-output" class="details-output details-status">None</p>
-                                <select name="status" id="details-status-input" class="status-list form-control details-status details-control" style="display: none;"><option value=""></option></select>
+                                <!--<select name="status" id="details-status-input" class="status-list form-control details-status details-control" style="display: none;"><option value=""></option></select>-->
+                                <input name="status" id="details-status-input" class="status-input form-control details-status details-control" style="display: none;">
+
                             </div>
                             <div class="form-group">
                                 <label for="details-reader-input">Current Reader</label>
                                 <p id="details-reader-output" class="details-output details-reader">None</p>
-                                <select name="currentreader" id="details-reader-input" class="current-reader-list form-control details-control details-reader" style="display: none;"><option value=""></option></select>
+                                <!--<select name="currentreader" id="details-reader-input" class="current-reader-list form-control details-control details-reader" style="display: none;"><option value=""></option></select>-->
+                                <input name="currentreader" type="text" id="details-reader-input" class="current-reader-input form-control details-control details-reader" style="display: none;">
+
                             </div>                            
                         </div>                
                     </div>
