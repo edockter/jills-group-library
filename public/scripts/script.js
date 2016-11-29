@@ -19,9 +19,10 @@ $(document).ready( function () {
                     "defaultContent": "<button class='btn'>Click!</button>"}
             ],
 			"paging": false,            
-            "ordering": false,            
+            //"ordering": false,
+            //"dom": 'lrtip',
 			"searching": true,
-            "sDom": '<"top"i>rt<"bottom"lp><"clear">',
+            "dom": '<"top">t<"bottom"ilp><"clear">',
             "initComplete":function(settings, json) {
                 // Update the listbox on the form for author filtering
                 UpdateFilterListBoxes(json);
@@ -69,10 +70,11 @@ $(document).ready( function () {
     });
     
     $('#filter-button').click(function() {        
-        $(".filter").animate({
+        $(".filter-row").animate({
             height: "toggle",
             opacity: "toggle"
-        }, "slow").selectpicker('deselectAll');        
+        }, "slow");
+        $('filter').selectpicker('deselectAll');        
     });
 
     $('#search-button').click(function() {
@@ -403,11 +405,11 @@ function ProcessAuthorsList() {
                 $('.author-list').append('<option>' + data[i].author + '</option>');                
             }
             
-            // use selectpicker a lot so after population, refresh ALL of them and hide the filters
+            // use selectpicker a lot so after population, refresh ALL of them
             $('select').addClass('selectpicker').attr('data-selected-text-format','count > 1');    
             $('.author-list').attr('data-selected-text-format', 'count > 2');
             $('.selectpicker').selectpicker('refresh');
-            $('.filter').selectpicker('hide');    
+            $('.filter-row').hide();
         },
         error: function(data, textStatus, jqXHR) {
             console.log('error: ' + jqXHR);
