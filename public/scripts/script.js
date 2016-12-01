@@ -331,7 +331,7 @@ function PopulateModal(clickedBookId) {
 function SetOutput($object, textValue) {
     $.each($object, function (index, item) {
         if ($(item).is('input')) {
-            $(item).val(textValue || 'None');
+            $(item).val(textValue || '');
         }
         else if ($(item).is('p')) {
             $(item).text(textValue || 'None');
