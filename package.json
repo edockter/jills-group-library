@@ -4,7 +4,8 @@
   "description": "Application to organize and serve the public library for a small group.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jshint app.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "express": "^4.14.0",
     "morgan": "^1.7.0",
     "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4"
   }
 }
