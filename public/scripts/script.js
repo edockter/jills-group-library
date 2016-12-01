@@ -67,7 +67,8 @@ $(document).ready(function () {
     $('#bookDetails').on('hidden.bs.modal', function () {
         // reset form controls        
         $('.details-output').show().text('');
-        $('input.details-author').remove();
+        $(this).find('input.author-input').remove();
+        $(this).find('.remove-author-button').hide();
         $('.details-control').hide().val('');
         $('#details-modal-save-button').css('display', 'hidden');
     });
