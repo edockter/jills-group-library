@@ -276,7 +276,7 @@ $(document).ready(function () {
                 queue: false, duration: 'fast', easing: "swing", complete: function () {
                     $(this).remove();
 
-                    if ($('.author-input').length <= 1) {
+                    if ($('.author-input:visible').length <= 1) {
                         $('.remove-author-button').fadeOut('fast');
                     }
                 }
