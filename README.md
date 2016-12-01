@@ -1,6 +1,6 @@
 # Library Manager
-A simple library manager.
+###A simple library manager.
 
-Database = PostgreSQL
-Server   = node.js
-Client   = jQuery
+* Database = PostgreSQL
+* Server   = node.js
+* Client   = jQuery
