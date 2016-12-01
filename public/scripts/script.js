@@ -258,7 +258,7 @@ $(document).ready(function () {
             $('.remove-author-button').fadeIn();
         }
 
-        $(this).before('<input name="Author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none;">');
+        $(this).before('<input name="author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none;">');
         $(this).prev().css('opacity', 0)
             .slideDown('fast').animate(
             { opacity: 1 },
