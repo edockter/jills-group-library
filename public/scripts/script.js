@@ -1,16 +1,21 @@
 // READY Document actions -- DOM manipulations
 $(document).ready( function () {    
+    // turn off AJAX caching. IE does it tooooo much
+    $.ajaxSetup({cache: false});
+
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable( {
             "processing": true,
             "autoWidth": false,
             "sAjaxDataProp": "",
             "ajax": "/api/books",
+            "order": [[1, "asc"]],
             "columnDefs": [
                 { "visible": false, "targets": 0 },
-                {"width": "35%", "targets":  [1 , 2] },
-                {"width": "10%", "targets":  [3 , 4, 5] },
-                { "className": "dt-center", "targets": [ 2, 3, 4, 5 ] }                
+                {"width": "35%", "targets":  [1] },
+                {"width": "25%", "targets":  [2] },
+                {"width": "15%", "targets":  [3 , 4, 5] },
+                { "className": "dt-center", "targets": [ 2, 3, 4, 5 ] }
             ],
             "columns": [
                 { "data": "bookid"},
@@ -26,10 +31,13 @@ $(document).ready( function () {
             //"ordering": false,
             //"dom": 'lrtip',
 			"searching": true,
-            "dom": '<"top">it<"bottom"lp><"clear">',
+            "dom": '<"top">t<"bottom"lp><"clear">',
             "initComplete":function(settings, json) {
                 // Update the listbox on the form for author filtering
                 UpdateFilterListBoxes(json);
+
+                    // make datatable unclickable -- not an option for some reason
+                    $('#datatable').find("th").off("click.DT").removeAttr('tabindex').css('background-image', '');
 
                 // show page contents when datatable rendering is complete, solve animation jumps
                 $('.container-fluid > .row').show().addClass('animated fadeInLeft');
