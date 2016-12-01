@@ -64,7 +64,7 @@ $(document).ready( function () {
     });
 
     $('#bookDetails').on('hidden.bs.modal', function () {
-        // reset form controls
+        // reset form controls        
         $('.details-output').show().text('');
         $('input.details-author').remove();
         $('.details-control').hide().val('');        
@@ -80,7 +80,10 @@ $(document).ready( function () {
         $('.details-output').stop(true,true).fadeToggle('fast', 'swing');
         $('.details-control').stop(true, true).fadeToggle('fast', 'swing');
         
-        $('#details-modal-save-button').fadeToggle();        
+        $('#details-modal-save-button').fadeToggle();
+        var addAuthorButton = $('#bookDetailsForm').find('.add-author-button');        
+        addAuthorButton.fadeToggle();
+        AnimateSelector(addAuthorButton, 'slideInUp');
         AnimateSelector($('#details-modal-save-button'), 'slideInUp');        
     });
     
@@ -231,11 +234,11 @@ $(document).ready( function () {
         });    
      });  
 
-    $('#add-author-button').click(function() { 
-        AnimateSelector($('#add-author-button'), 'pulse');
+    $('.add-author-button').click(function() { 
+        AnimateSelector($('.add-author-button'), 'pulse');
         
-        if ($('.author-input').length <= 1) {            
-            $('#remove-author-button').fadeIn();
+        if ($('.author-input:visible').length <= 1) {            
+            $('.remove-author-button').fadeIn();
         }
 
         $(this).before('<input name="Author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none;">');
@@ -246,7 +249,7 @@ $(document).ready( function () {
             );
      });
 
-     $('#remove-author-button').click(function() {
+     $('.remove-author-button').click(function() {
          var authorBoxes = $('.author-input');        
 
         $(authorBoxes[authorBoxes.length-1]).css('opacity', 1)
@@ -256,7 +259,7 @@ $(document).ready( function () {
                 $(this).remove();
          
                 if ($('.author-input').length <= 1) {
-                    $('#remove-author-button').fadeOut('fast');
+                    $('.remove-author-button').fadeOut('fast');
                 }                
             }
         });                
@@ -269,7 +272,7 @@ $(document).ready( function () {
 // gets book details from API and loads to modal.
 function PopulateModal(clickedBookId) {
     $('.details-control').hide();
-    
+    $('#bookDetailsForm').find('.add-author-button').hide();
     $('#details-modal-save-button').hide();
     
     var ajaxRequest = $.ajax({
@@ -290,9 +293,10 @@ function PopulateModal(clickedBookId) {
             type: "GET",
             contentType: "application/json",
             dataType: "json",
-            success: function(data, textStatus, jqXHR) {                
+            success: function(data, textStatus, jqXHR) {
+                var addAuthorButton = $('#bookDetailsForm').find('.add-author-button');                
                 for(var i = 0; i < data.length; i++) {
-                    $('.author-group').append('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');                    
+                    addAuthorButton.before('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');                    
                     $('input.details-author').last().val(data[i].author);                                        
                 }                
                 $('#bookDetails').modal("show");

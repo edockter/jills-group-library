@@ -46,7 +46,7 @@
                         <tr class="filter-row">                        
                             <th style="border: 1px solid lightgrey; "></th>
                             <th style="border: 1px solid lightgrey; "></th>
-                            <th style="border: 1px solid lightgrey;"><select multiple class="author-list filter form-control"><option value=""></option></select></th>
+                            <th style="border: 1px solid lightgrey;"><select multiple class="author-list filter form-control">Author<option value=""></option></select></th>
                             <th style="border: 1px solid lightgrey;" class="text-center"><select multiple class="core-value-list filter form-control"><option value=""></option></select></th>
                             <th style="border: 1px solid lightgrey;" class="text-center"><select class="status-list filter form-control"><option value=""></option></select></th>
                             <th style="border: 1px solid lightgrey;" class="text-center"><select class="current-reader-list filter form-control"><option value=""></option></select></th>
@@ -84,9 +84,9 @@
                         </div>
                         <div class="form-group">
                             <label for="author-input">Author</label>
-                            <input name="Author" type="text" class="form-control author-input" id="author-input" placeholder="Author">
-                            <div id="add-author-button" class="btn m-t-5"><small style="font-size: 14px; margin-left: 1%;">+ Add Author</small></div>
-                            <div id="remove-author-button" class="btn m-t-5" style="display: none;"><small style="font-size: 14px; margin-left: 1%;">- Remove Author</small></div>                        
+                            <input name="Author" type="text" class="form-control author-input" placeholder="Author">
+                            <div class="btn m-t-5 add-author-button"><small style="font-size: 14px; margin-left: 1%;">+ Add Author</small></div>
+                            <div class="btn m-t-5 remove-author-button" style="display: none;"><small style="font-size: 14px; margin-left: 1%;">- Remove Author</small></div>                        
                         </div>
                         <div class="form-group">
                             <label for="core-value-input">Core Value</label>
@@ -135,6 +135,8 @@
                             <div class="form-group author-group">
                                 <label id="details-author-label "for="author-input">Authors</label>
                                 <p id="details-author-output" class="details-output details-author">None</p>                                
+                                <div class="btn m-t-5 add-author-button"><small style="font-size: 14px; margin-left: 1%;">+ Add Author</small></div>
+                                <div class="btn m-t-5 remove-author-button" style="display: none;"><small style="font-size: 14px; margin-left: 1%;">- Remove Author</small></div>
                             </div>
                             <div class="form-group">
                                 <label for="core-value-input">Core Value</label>
