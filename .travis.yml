@@ -4,3 +4,10 @@ node_js:
   - "6.1"
   - "nodejs"
   - "iojs"
+
+# optionally specify a list of environments, for example to test different RDBMS
+env:
+  - DB=pgsql
+
+notifications:
+  email: "eric.dockter@gmail.com"
