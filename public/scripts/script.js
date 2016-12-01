@@ -3,10 +3,13 @@ $(document).ready( function () {
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable( {
             "processing": true,
+            "autoWidth": false,
             "sAjaxDataProp": "",
             "ajax": "/api/books",
             "columnDefs": [
                 { "visible": false, "targets": 0 },
+                {"width": "35%", "targets":  [1 , 2] },
+                {"width": "10%", "targets":  [3 , 4, 5] },
                 { "className": "dt-center", "targets": [ 2, 3, 4, 5 ] }                
             ],
             "columns": [
@@ -27,6 +30,9 @@ $(document).ready( function () {
             "initComplete":function(settings, json) {
                 // Update the listbox on the form for author filtering
                 UpdateFilterListBoxes(json);
+
+                // show page contents when datatable rendering is complete, solve animation jumps
+                $('.container-fluid > .row').show().addClass('animated fadeInLeft');
             } 
 		});    
     
