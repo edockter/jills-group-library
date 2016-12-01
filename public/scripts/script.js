@@ -71,6 +71,17 @@ $(document).ready(function () {
         $('.details-control').hide().val('');
         $('#details-modal-save-button').css('display', 'hidden');
     });
+    
+    $('#addBooks').on('hidden.bs.modal', function () {
+        // reset form controls                
+        var authorInputs = $(this).find('input.author-input');
+        if (authorInputs.length > 1) {
+            do {
+                authorInputs.last().remove();
+            } while (authorInputs.length > 1);
+        }
+        $(this).find('.remove-author-button').hide();
+    });
 
     $('.btn-lg').click(function () {
         AnimateSelector($(this), 'jello');
