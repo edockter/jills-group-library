@@ -1,4 +1,5 @@
 # Library Manager
+[![Build Status](https://travis-ci.org/edockter/jills-group-library.svg?branch=master)](https://travis-ci.org/edockter/jills-group-library)
 ###A simple library manager.
 
 * Database = PostgreSQL
