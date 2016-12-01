@@ -24,3 +24,17 @@ body {
 .sweet-alert button {
     background-color: #337AB7 !important;
 }
+table.dataTable thead .sorting {
+    background-image: none !important;
+}
+table.dataTable thead .sorting_asc {
+    background-image: none !important;
+}
+table.dataTable thead .sorting:after {
+    opacity: 0.0;
+    content: "" !important;
+}
+table.dataTable thead .sorting_asc:after {
+    opacity: 0.0;
+    content: "" !important;
+}
