@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 var util = require('util');
-var pg = require('pg').native;
+var pg = require('pg');
 pg.defaults.ssl.true;
 const router = express.Router();
 var bodyParser = require('body-parser');
