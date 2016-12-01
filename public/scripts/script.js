@@ -246,7 +246,7 @@ $(document).ready(function () {
             $('.remove-author-button').fadeIn();
         }
 
-        $(this).before('<input name="Author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none; margin-bottom: 4px;">');
+        $(this).before('<input name="Author" type="text" class="author-input form-control" placeholder="Author" style="margin;top: 2%; display: none; margin-bottom: 2px;">');
         $(this).prev().css('opacity', 0)
             .slideDown('fast').animate(
             { opacity: 1 },
@@ -302,7 +302,7 @@ function PopulateModal(clickedBookId) {
                 success: function (data, textStatus, jqXHR) {
                     var addAuthorButton = $('#bookDetailsForm').find('.add-author-button');
                     for (var i = 0; i < data.length; i++) {
-                        addAuthorButton.before('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none; margin-bottom: 4px;">');
+                        addAuthorButton.before('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none; margin-bottom: 2px;">');
                         $('input.details-author').last().val(data[i].author);
                     }
                     $('#bookDetails').modal("show");
