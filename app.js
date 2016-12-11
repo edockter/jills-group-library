@@ -23,7 +23,7 @@ var port = process.env.PORT || 8080;
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-const routes = require('./routes/index');
+var routes = require('./routes/index');
 
 app.use('/', routes);
 

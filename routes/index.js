@@ -79,11 +79,11 @@ router.post('/api/books', (req, res, next) => {
   const results = [];
   // Grab data from http request
   const data = { 
-      Title: req.body.Title, 
-      CoreValue: req.body.CoreValue, 
-      Status: req.body.Status, 
-      CurrentReader: req.body.CurrentReader, 
-      Author: req.body.Author };
+      Title: req.body.title, 
+      CoreValue: req.body.corevalue, 
+      Status: req.body.status, 
+      CurrentReader: req.body.currentreader, 
+      Author: req.body.author };
   
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {

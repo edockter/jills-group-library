@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "6"
+  - "6.1"
+  - "node"
+  - "iojs"
+
+# optionally specify a list of environments, for example to test different RDBMS
+env:
+  - DB=pgsql
+
+notifications:
+  email: "eric.dockter@gmail.com"
