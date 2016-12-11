@@ -6,8 +6,15 @@ pg.defaults.ssl.true;
 const router = express.Router();
 var bodyParser = require('body-parser');
 
-// Replace with YOUR connection string, or add to .env file.
-const connectionString = process.env.DATABASE_URL; 
+// Replace with YOUR connection strings, or add to .env file.
+var connectionString;
+if (process.env.NODE_ENV === 'development') {
+  connectionString = process.env.DEV_DATABASE_URL; 
+}
+else if (process.env.NODE_ENV === 'production') { 
+  connectionString = process.env.DATABASE_URL; 
+} 
+console.log("connectionString is "+ connectionString);
 
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(

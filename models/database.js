@@ -3,7 +3,14 @@ const pg = require('pg');
 pg.defaults.ssl.true;
 
 // Replace with YOUR connection string, or add to .env file.
-const connectionString = process.env.DATABASE_URL;
+var connectionString;
+
+if (env.NODE_ENV === 'development') {
+  connectionString = env.DEV_DATABASE_URL; 
+}
+else if (env.NODE_ENV === 'production') { 
+  connectionString = env.DATABASE_URL; 
+}
 
 const client = new pg.Client(connectionString);
 client.connect();

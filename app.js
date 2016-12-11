@@ -4,6 +4,7 @@ var env = require('dotenv').config();
 var morgan = require('morgan');
 var pg = require('pg');
 var bodyParser = require('body-parser');
+var errorhandler = require('errorhandler');
 
 var app = express();
 
@@ -37,5 +38,12 @@ app.use((err, req, res, next) => {
     error: err
   });
 });
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(errorhandler({ dumpExceptions: true, showStack: true })); 
+}
+else if (process.env.NODE_ENV === 'production') {
+  app.use(errorhandler()); 
+}
 
 module.exports = app;
