@@ -69,6 +69,7 @@ $(document).ready(function () {
         $('.details-output').show().text('');
         $('input.details-author').remove();
         $('.details-control').hide().val('');
+        $('#bookDetailsForm').find('.author-input').remove();
         $('#details-modal-save-button').css('display', 'hidden');
     });
 
@@ -302,7 +303,7 @@ function PopulateModal(clickedBookId) {
                 success: function (data, textStatus, jqXHR) {
                     var addAuthorButton = $('#bookDetailsForm').find('.add-author-button');
                     for (var i = 0; i < data.length; i++) {
-                        addAuthorButton.before('<input name="author" type="text" class="form-control details-control details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');
+                        addAuthorButton.before('<input name="author" type="text" class="form-control details-control author-input details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');
                         $('input.details-author').last().val(data[i].author);
                     }
                     $('#bookDetails').modal("show");
