@@ -11,7 +11,8 @@ client.connect();
 var results = [];
 
 var query = client.query(
-    "select * FROM books JOIN authors ON books.bookId = authors.bookId"
+    //"select * FROM books JOIN authors ON books.bookId = authors.bookId"
+    "select * FROM authors ORDER BY bookId"
 );
 
 query.on('row', row => {
