@@ -111,11 +111,6 @@ $(document).ready(function () {
     });
 
     $('#filter-button').click(function () {
-        $(".filter-row").animate({
-            height: "toggle",
-            opacity: "toggle"
-        }, "slow");
-
         $('.filter').selectpicker('deselectAll');
     });
 
