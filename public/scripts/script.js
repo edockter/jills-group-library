@@ -77,11 +77,13 @@ $(document).ready(function () {
     $('#addBooks').on('hidden.bs.modal', function () {
         // reset form controls                
         var authorInputs = $(this).find('input.author-input');
-        if (authorInputs.length > 1) {
-            do {
-                authorInputs.last().remove();
-            } while (authorInputs.length > 1);
+        
+        // get back to 1 author input 
+        while (authorInputs.length > 1) {
+            authorInputs.last().remove();
+            authorInputs = $(this).find('input.author-input');
         }
+        
         $(this).find('.remove-author-button').hide();
     });
 
@@ -315,11 +317,8 @@ function PopulateModal(clickedBookId) {
                 success: function (data, textStatus, jqXHR) {
                     var addAuthorButton = $('#bookDetailsForm').find('.add-author-button');
                     for (var i = 0; i < data.length; i++) {
-<<<<<<< HEAD
-                        addAuthorButton.before('<input name="author" type="text" class="form-control details-control author-input details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');
-=======
+                        //addAuthorButton.before('<input name="author" type="text" class="form-control details-control author-input details-author" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');
                         addAuthorButton.before('<input name="author" type="text" class="form-control details-control details-author author-input" id="details-author-input-' + i + '" placeholder="Author" style="display: none;">');
->>>>>>> 119e7780721657f6668d70255c85d68c84fa3c78
                         $('input.details-author').last().val(data[i].author);
                     }
                     $('#bookDetails').modal("show");
