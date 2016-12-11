@@ -509,8 +509,8 @@
           : '';
       var drop =
           '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
-          '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
-          '<span class="filter-option pull-left"></span>&nbsp;' +
+          '<span class="filter-option text-center" style="font-size: 20px; float: center;"></span>&nbsp;' +
+          '<button type="button" class="' + this.options.styleBase + ' btn-default pull-right" data-toggle="dropdown"' + autofocus + ' role="button">' +          
           '<span class="bs-caret">' +
           this.options.template.caret +
           '</span>' +
@@ -806,7 +806,7 @@
 
       //strip all HTML tags and trim the result, then unescape any escaped tags
       this.$button.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
-      this.$button.children('.filter-option').html(title);
+      this.$button.siblings('.filter-option').html(title);
 
       this.$element.trigger('rendered.bs.select');
     },
