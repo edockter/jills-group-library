@@ -15,7 +15,11 @@ $(document).ready(function () {
             { "width": "35%", "targets": [1] },
             { "width": "25%", "targets": [2] },
             { "width": "15%", "targets": [3, 4, 5] },
-            { "className": "dt-center", "targets": [2, 3, 4, 5] }
+            { "className": "dt-center", "targets": [2, 3, 4, 5] },
+            { "sTitle": '<select multiple class="author-list filter form-control" data-title="Author"><option value=""></option></select>', "targets": 2 },
+            { "sTitle": '<select multiple class="core-value-list filter form-control" data-title="Core Value"><option value=""></option></select>', "targets": 3 },
+            { "sTitle": '<select class="status-list filter form-control" data-title="Status"><option value=""></option></select>', "targets": 4 },
+            { "sTitle": '<select class="current-reader-list filter form-control" data-title="Current Reader"><option value=""></option></select>', "targets": 5 },
         ],
         "columns": [
             { "data": "bookid" },
