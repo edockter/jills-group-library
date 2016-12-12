@@ -12,9 +12,10 @@ $(document).ready(function () {
         "order": [[1, "asc"]],
         "columnDefs": [
             { "visible": false, "targets": 0 },
-            { "width": "35%", "targets": [1] },
-            { "width": "25%", "targets": [2] },
-            { "width": "15%", "targets": [3, 4, 5] },
+            { "width": "37%", "targets": [1] },
+            { "width": "23%", "targets": [2] },
+            { "width": "15%", "targets": [3, 4] },
+            { "width": "20%", "targets": [5] },
             { "className": "dt-center", "targets": [2, 3, 4, 5] },
             { "sTitle": '<select multiple class="author-list filter form-control" data-title="Author"><option value=""></option></select>', "targets": 2 },
             { "sTitle": '<select multiple class="core-value-list filter form-control" data-title="Core Value"><option value=""></option></select>', "targets": 3 },
