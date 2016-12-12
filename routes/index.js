@@ -5,6 +5,7 @@ var pg = require('pg');
 pg.defaults.ssl.true;
 const router = express.Router();
 var bodyParser = require('body-parser');
+var trim = require('trim');
 
 // Replace with YOUR connection strings, or add to .env file.
 var connectionString;
@@ -79,11 +80,11 @@ router.post('/api/books', (req, res, next) => {
   const results = [];
   // Grab data from http request
   const data = { 
-      Title: req.body.title, 
-      CoreValue: req.body.corevalue, 
-      Status: req.body.status, 
-      CurrentReader: req.body.currentreader, 
-      Author: req.body.author };
+      Title: trim(req.body.title), 
+      CoreValue: trim(req.body.corevalue), 
+      Status: trim(req.body.status),
+      CurrentReader: trim(req.body.currentreader), 
+      Author: trim(req.body.author) };
   
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {
@@ -161,11 +162,11 @@ router.put('/api/books/:bookid', (req, res, next) => {
     const bookid = req.params.bookid;
     // Grab data from http request    
     const data = {
-        title: req.body.title,
-        corevalue: req.body.corevalue,
-        status: req.body.status,
-        currentreader: req.body.currentreader,
-        Author: req.body.author 
+        title: trim(req.body.title),
+        corevalue: trim(req.body.corevalue),
+        status: trim(req.body.status),
+        currentreader: trim(req.body.currentreader),
+        Author: trim(req.body.author) 
     };
       
     // Get a Postgres client from the connection pool
