@@ -349,4 +349,19 @@ router.get('/api/authors/:bookid', (req, res, next) => {
   });
 });
 
+router.post('/api/login/', (req, res, next) => {
+    var passwordEntered = trim(req.body.password);
+    var passwordSaved = trim(process.env.PASSWORD);
+    
+    console.log(passwordEntered);
+    console.log(passwordSaved);
+    
+    if (passwordEntered.toUpperCase() === passwordSaved.toUpperCase()) {
+        res.status(200).send('success');
+    }
+    else {
+        res.status(400).send('password mismatch');
+    }    
+});
+
 module.exports = router;

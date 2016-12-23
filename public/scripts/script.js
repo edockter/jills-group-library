@@ -161,20 +161,32 @@ $(document).ready(function () {
             function (inputValue) {
                 if (inputValue === false) return false;
 
-                if (inputValue === "") {
+                else if (inputValue === "") {
                     swal.showInputError("You need to write something!");
                     return false;
                 }
-                if (inputValue.toUpperCase() === "SWORDFISH") {
+                else if (inputValue.toUpperCase() === "SWORDFISH") {
                     swal({
                         html: true,
                         title: "Swordfish!",
                         text: 'Here is your swordfish video.<br/><br/><iframe width="400" height="315" src="https://www.youtube.com/embed/IOxpPJYUTDM" frameborder="0" allowfullscreen></iframe>',
                         type: "success",
                     });
-                }                
+                }
+                else {
+                    event.preventDefault();                    
+                    var ajaxURL = '/api/login';
+                    var ajaxData = { password: inputValue };
+                    var ajaxPost = $.post(ajaxURL, ajaxData);
 
-                
+                    ajaxPost.done(function (data) {
+                        swal("We Posted.", data, "success");
+                    });
+
+                    ajaxPost.fail(function (data) {
+                        swal("We Posted.", data, "error");
+                    });
+                }                
             });
     });
 
