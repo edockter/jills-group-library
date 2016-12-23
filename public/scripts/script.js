@@ -92,7 +92,7 @@ $(document).ready(function () {
         $(this).find('.remove-author-button').hide();
     });
 
-    $('.btn-lg').click(function () {
+    $('.btn-lg, .btn').click(function () {
         AnimateSelector($(this), 'jello');
     });
 
@@ -143,6 +143,38 @@ $(document).ready(function () {
                     text: "Search term " + inputValue + " applied.",
                     type: "success",
                 });
+            });
+    });
+
+    $('#login-button').click(function () {        
+        swal({
+            title: "Login",
+            text: "What's the password?",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,      // change when done testing
+            inputPlaceholder: "Password",
+            allowOutsideClick: true,
+            confirmButtonText: "Search",
+            cancelButtonText: "Close"
+        },
+            function (inputValue) {
+                if (inputValue === false) return false;
+
+                if (inputValue === "") {
+                    swal.showInputError("You need to write something!");
+                    return false;
+                }
+                if (inputValue.toUpperCase() === "SWORDFISH") {
+                    swal({
+                        html: true,
+                        title: "Swordfish!",
+                        text: 'Here is your swordfish video.<br/><br/><iframe width="400" height="315" src="https://www.youtube.com/embed/IOxpPJYUTDM" frameborder="0" allowfullscreen></iframe>',
+                        type: "success",
+                    });
+                }                
+
+                
             });
     });
 
