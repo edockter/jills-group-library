@@ -15,11 +15,18 @@ else if (env.NODE_ENV === 'production') {
 const client = new pg.Client(connectionString);
 client.connect();
 const createBooks = client.query(
-  'CREATE TABLE books(bookId SERIAL PRIMARY KEY, Title VARCHAR(250) not null, CoreValue VARCHAR(100) not null, Status Varchar(50), CurrentReader VARCHAR(75))'
+  'CREATE TABLE books(bookId SERIAL PRIMARY KEY, Title VARCHAR(250) NOT NULL, CoreValue VARCHAR(100) NOT NULL, Status Varchar(50), CurrentReader VARCHAR(75), Description VARCHAR(MAX), '
   );
 
 const createAuthors = client.query(
-  'CREATE TABLE authors(authorId SERIAL PRIMARY KEY, bookId SERIAL REFERENCES books(bookId), authorName VARCHAR(50))'
+  'CREATE TABLE authors(authorId SERIAL PRIMARY KEY, bookId SERIAL REFERENCES books(bookId), authorName VARCHAR(50)) NOT NULL'
   );
 
+const createCopies = client.query(
+  'CREATE TABLE copies(copyId SERIAL PRIMARY KEY, bookId SERIAL REFERENCES books(bookId) NOT NULL)'
+  );
+
+  const createCheckouts = client.query(
+  'CREATE TABLE checkouts(checkoutId SERIAL PRIMARY KEY, copyId SERIAL REFERENCES copies(copyId) not null, active BOOLEAN NOT NULL DEFAULT true)'
+  );
 createAuthors.on('end', () => { client.end(); });

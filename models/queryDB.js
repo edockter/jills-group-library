@@ -12,7 +12,7 @@ var results = [];
 
 var query = client.query(
     //"select * FROM books JOIN authors ON books.bookId = authors.bookId"
-    "select * FROM authors ORDER BY bookId"
+    "SELECT DISTINCT AuthorName AS Author FROM authors ORDER BY AuthorName"
 );
 
 query.on('row', row => {
