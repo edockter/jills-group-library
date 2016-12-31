@@ -35,9 +35,13 @@ var port = process.env.PORT || 8080;
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-var routes = require('./routes/index');
+var basicRoutes = require('./routes/basic');
+var apiRoutes = require('./routes/booksAPI');
+var loginRoutes = require('./routes/login');
 
-app.use('/', routes);
+app.use('/', basicRoutes);
+app.use('/api/', apiRoutes);
+app.use('login/', loginRoutes);
 
 app.listen(port, function() {
     console.log("App is running on ports " + port);

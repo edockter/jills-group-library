@@ -15,14 +15,8 @@ if (process.env.NODE_ENV === 'development') {
 else if (process.env.NODE_ENV === 'production') { 
   connectionString = process.env.DATABASE_URL; 
 } 
-console.log("connectionString is "+ connectionString);
 
-router.get('/', (req, res, next) => {
-  res.sendFile(path.join(
-    __dirname, '..', '/public/', 'index.html'));
-});
-
-router.get('/api/books/:bookid', (req, res, next) => {
+router.get('/books/:bookid', (req, res, next) => {
     const results = [];
     const bookid = req.params.bookid;
 
@@ -50,7 +44,7 @@ router.get('/api/books/:bookid', (req, res, next) => {
   });
 });
 
-router.get('/api/books', (req, res, next) => {
+router.get('/books', (req, res, next) => {
   const results = [];
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {
@@ -76,7 +70,7 @@ router.get('/api/books', (req, res, next) => {
   });
 });
 
-router.post('/api/books', (req, res, next) => {
+router.post('/books', (req, res, next) => {
   const results = [];
   // Grab data from http request
   const data = { 
@@ -157,7 +151,7 @@ router.post('/api/books', (req, res, next) => {
 
 
 
-router.put('/api/books/:bookid', (req, res, next) => {    
+router.put('/books/:bookid', (req, res, next) => {    
     const results = [];
     const bookid = req.params.bookid;
     // Grab data from http request    
@@ -245,7 +239,7 @@ router.put('/api/books/:bookid', (req, res, next) => {
     });
 });
 
-router.delete('/api/books/:bookid', (req, res, next) => {
+router.delete('/books/:bookid', (req, res, next) => {
   const results = [];
   // Grab data from the URL parameters
   const bookid = req.params.bookid;
@@ -295,7 +289,7 @@ router.delete('/api/books/:bookid', (req, res, next) => {
   });
 });
 
-router.get('/api/authors/', (req, res, next) => {
+router.get('/authors/', (req, res, next) => {
   const results = [];
   // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {
@@ -321,7 +315,7 @@ router.get('/api/authors/', (req, res, next) => {
   });
 });
 
-router.get('/api/authors/:bookid', (req, res, next) => {
+router.get('/authors/:bookid', (req, res, next) => {
   const results = [];
   // Grab data from the URL parameters
   const bookid = req.params.bookid;
@@ -347,21 +341,6 @@ router.get('/api/authors/:bookid', (req, res, next) => {
       return res.json(results);
     });
   });
-});
-
-router.post('/api/login/', (req, res, next) => {
-    var passwordEntered = trim(req.body.password);
-    var passwordSaved = trim(process.env.PASSWORD);
-    
-    console.log(passwordEntered);
-    console.log(passwordSaved);
-    
-    if (passwordEntered.toUpperCase() === passwordSaved.toUpperCase()) {
-        res.status(200).send('success');
-    }
-    else {
-        res.status(400).send('password mismatch');
-    }    
 });
 
 module.exports = router;
