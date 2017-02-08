@@ -33,20 +33,22 @@
                 <button id="login-button" class="btn btn-default text-black pull-right"><i class="fa fa-user-circle fa-fw fa-lg" aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="row" style="display: none;">
+        <div class="row left" style="display: none;">
             <div class="col-lg-3 col-lg-offset-1">
                 <h1>Checkout System</h1>
             </div>            
         </div>    
-        <div class="row" style="display: none;">
+        <div class="row left" style="display: none;">
             <div class="btn-group col-lg-10 col-lg-offset-1">
-                <button id="filter-button" class=" btn-lg btn-danger text-black">Filters<i class="fa fa-filter fa-fw" aria-hidden="true"></i></button>                
+                <!-- Hidden by default -->
+                <button id="filter-button" class=" btn-lg btn-danger text-black" style="display: none">Clear Filters<i class="fa fa-filter fa-fw" aria-hidden="true"></i></button>                
                 <button id="search-button" class=" btn-lg btn-warning text-dark">Search<i class="fa fa-flip-horizontal fa-search fa-fw" aria-hidden="true"></i></button>
-                <button id="add-book-button" class="btn-lg btn-info text-dark" data-toggle="modal" data-target="#addBooks"><i class="fa fa-book fa-fw" aria-hidden="true"></i>Add Book</button>                
+                <!-- Hidden by default -->
+                <button id="add-book-button" class="btn-lg btn-info text-dark" data-toggle="modal" data-target="#addBooks" style="display: none;"><i class="fa fa-book fa-fw" aria-hidden="true"></i>Add Book</button>                
             </div>            
         </div>
         <br/>
-        <div class="row" style="display: none;">
+        <div class="row left" style="display: none;">
             <div class="col-lg-10 col-lg-offset-1">                
                 <table id="datatable" class="cell-border">
                     <thead>

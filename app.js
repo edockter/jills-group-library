@@ -6,13 +6,14 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
 var clientSessions = require('client-sessions');
+var cookieParser = require('cookie-parser');
 
 var app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cookieParser(process.env.SECRET_KEY, { expires: new Date() + 259200000, maxAge: 259200000, httpOnly: false }));
 app.use('/css', express.static('public/css'));
 app.use('/assets', express.static('public/assets'));
 app.use('/scripts', express.static('public/scripts'));
@@ -41,7 +42,7 @@ var loginRoutes = require('./routes/login');
 
 app.use('/', basicRoutes);
 app.use('/api/', apiRoutes);
-app.use('login/', loginRoutes);
+app.use('/login/', loginRoutes);
 
 app.listen(port, function() {
     console.log("App is running on ports " + port);
