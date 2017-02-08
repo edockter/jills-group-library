@@ -205,7 +205,7 @@ $(document).ready(function () {
                         $datatable.ajax.reload().draw();
 
                         // confirm login
-                        swal("Login successful.", data, "success");
+                        swal("Login successful.", "Welcome to the inner circle.", "success");
 
                         // change login button to logout
                         $(this).attr('url', '/login/logout');
@@ -217,7 +217,7 @@ $(document).ready(function () {
 
                     ajaxPost.fail(function (data) {
                         // Nope
-                        swal("Invalid login.", data, "error");
+                        swal("Invalid login.", "That password did not work. How embarassing for you.", "error");
                     });
                 }                
             });
