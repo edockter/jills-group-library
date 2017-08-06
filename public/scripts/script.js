@@ -3,6 +3,14 @@ $(document).ready(function () {
     // turn off AJAX caching. IE does it tooooo much
     $.ajaxSetup({ cache: false });
 
+    // unhide Add Book button if we have a cookie
+    if (VerifyCookie()) {
+        $('#add-book-button').show();
+    }
+
+    // get all filters 1 time
+    $filters = $('.filter');
+
     // Initialize the datatable
     var $datatable = $('#datatable').DataTable({
         "processing": true,
@@ -45,16 +53,29 @@ $(document).ready(function () {
             $('#datatable').find("th").off("click.DT").removeAttr('tabindex').css('background-image', '');
 
             // show page contents when datatable rendering is complete, solve animation jumps
-            $('.container-fluid > .row').show().addClass('animated fadeInLeft');
+            $('.container-fluid > .left').show().addClass('animated fadeInLeft');
         }
     });
 
     // when selectlist value is changed, filter the datatable
     $('.filter').change(function () {
         var selectedValue = $('.select-list option:selected').text();
+        var $filterButton = $('#filter-button');
 
         // filter the table with the selected value
         $datatable.search(selectedValue).draw();
+        
+        $filters.each(function() { 
+            console.log( $(this).selectpicker('val') );
+
+            if ($(this).selectpicker('val') != null) {
+                // make sure filter button is shown
+                if ($($filterButton).is(':hidden')) {
+                    $($filterButton).show();
+                    AnimateSelector($filterButton, "slideInLeft");
+                } 
+            }
+        });
     });
 
     // Set add button width match upper 2 buttons total width
@@ -92,7 +113,7 @@ $(document).ready(function () {
         $(this).find('.remove-author-button').hide();
     });
 
-    $('.btn-lg').click(function () {
+    $('.btn-lg, .btn').click(function () {
         AnimateSelector($(this), 'jello');
     });
 
@@ -143,6 +164,62 @@ $(document).ready(function () {
                     text: "Search term " + inputValue + " applied.",
                     type: "success",
                 });
+            });
+    });
+
+    $('#login-button').click(function () {        
+        swal({
+            title: "Login",
+            text: "What's the password?",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,      // change when done testing
+            inputPlaceholder: "Password",
+            allowOutsideClick: true,
+            confirmButtonText: "Search",
+            cancelButtonText: "Close"
+        },
+            function (inputValue) {
+                if (inputValue === false) return false;
+
+                else if (inputValue === "") {
+                    swal.showInputError("You need to write something!");
+                    return false;
+                }
+                else if (inputValue.toUpperCase() === "SWORDFISH") {
+                    swal({
+                        html: true,
+                        title: "Swordfish!",
+                        text: 'Here is your swordfish video.<br/><br/><iframe width="400" height="315" src="https://www.youtube.com/embed/IOxpPJYUTDM" frameborder="0" allowfullscreen></iframe>',
+                        type: "success",
+                    });
+                }
+                else {
+                    event.preventDefault();                    
+                    var ajaxURL = '/login';
+                    var ajaxData = { password: inputValue };
+                    var ajaxPost = $.post(ajaxURL, ajaxData);
+
+                    ajaxPost.done(function (data) {
+                        // refresh datatable since we'll get different results now
+                        $datatable.ajax.reload().draw();
+
+                        // confirm login
+                        swal("Login successful.", "Welcome to the inner circle.", "success");
+
+                        // change login button to logout
+                        $(this).attr('url', '/login/logout');
+
+                        // show add book button
+                        $('#add-book-button').fadeIn();
+
+                    });
+
+                    ajaxPost.fail(function (data) {
+                        // Nope
+                        swal("Invalid login.", "That password did not work. How embarassing for you.", "error");
+                    });
+                }                
             });
     });
 
@@ -240,7 +317,7 @@ $(document).ready(function () {
         });
 
         ajaxPut.done(function (data) {
-            $datatable.ajax.reload();
+            $datatable.ajax.reload().draw();
             $('#bookDetails').modal('hide');
 
             swal("Book deleted!", "Book has been deleted from the system.", "success");
@@ -295,6 +372,12 @@ function PopulateModal(clickedBookId) {
     $('.details-control').hide();
     $('#bookDetailsForm').find('.add-author-button').hide();
     $('#details-modal-save-button').hide();
+
+    // if we don't have a cookie hide the buttons
+    if (!VerifyCookie()) {
+        $('#details-modal-edit-button').hide();
+        $('#details-modal-delete-button').hide();
+    }
 
     var ajaxRequest = $.ajax({
         url: "api/books/" + clickedBookId,
@@ -465,4 +548,17 @@ function AnimateSelector($element, animationString) {
     });
 
     return $element;
+}
+
+function VerifyCookie() {
+    // No cookie
+    if (document.cookie === ""){
+        return false;
+    } 
+    // Can has cookie
+    else {
+        return true;
+    }
+
+    return false;
 }
